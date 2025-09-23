@@ -1,0 +1,75 @@
+/* Text Effects - Glowing and Flickering */
+
+/* Glowing Text Effect */
+.glow-text {
+  color: #fff;
+  text-shadow:
+    0 0 5px #ff99ff,
+    0 0 8px #ff66ff,
+    0 0 15px #ff33ff,
+    0 0 30px #ff00ff,
+    0 0 60px #ff00ff,
+    0 0 70px #ff00ff,
+    0 0 80px #ff00ff,
+    0 0 120px #ff00ff;
+}
+
+/* Flickering Text Effect - Exact copy from index.html */
+.flicker-text {
+  color: #fff !important;
+  text-shadow:
+    0 0 5px #ff99ff,
+    0 0 8px #ff66ff,
+    0 0 15px #ff33ff,
+    0 0 30px #ff00ff,
+    0 0 60px #ff00ff,
+    0 0 70px #ff00ff,
+    0 0 80px #ff00ff,
+    0 0 120px #ff00ff;
+  animation: flicker 5s infinite 0.75s !important;
+  opacity: 1 !important;
+}
+
+/* Override template fade animation for flicker text */
+h1.flicker-text {
+  animation: flicker 5s infinite 0.75s !important;
+  opacity: 1 !important;
+}
+
+/* Flickering animation - Modified to start immediately */
+@keyframes flicker {
+  0%, 2%, 4%, 96%, 98%, 100% {
+    text-shadow:
+      0 0 3px #ff99ff,
+      0 0 8px #ff66ff,
+      0 0 14px #ff33ff,
+      0 0 28px #ff00ff,
+      0 0 58px #ff00ff,
+      0 0 68px #ff00ff,
+      0 0 78px #ff00ff,
+      0 0 118px #ff00ff;
+  }
+  
+  1%, 3%, 97% {        
+    text-shadow: none;
+  }    
+}
+
+/* Title styling from index.html */
+.neon-title {
+  color: #FFF;
+  text-align: center;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  letter-spacing: 6px;
+}
+
+.neon-subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  color: #fff;
+  opacity: 0.8;
+}

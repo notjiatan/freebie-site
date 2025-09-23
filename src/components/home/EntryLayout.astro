@@ -34,8 +34,8 @@ const { image, imageAlt, title, content, button } = entry.data;
               
             )
           }
-          <h1 set:html={markdownify(title)} class="mb-4" />
-          <p set:html={markdownify(content)} class="mb-8" />
+          <h1 set:html={markdownify(title)} class="mb-4 flicker-text neon-title" />
+          <p set:html={markdownify(content)} class="mb-8 neon-subtitle" />
           {
             button && (
               <Button
