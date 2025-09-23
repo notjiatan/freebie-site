@@ -1,6 +1,5 @@
 ---
 import Social from "@components/common/Social.astro";
-import ThemeSwitcher from "@components/base/ThemeSwitcher.astro";
 ---
 
 <footer class="glass container lg:my-4 lg:rounded-lg intersect:animate-fadeUp opacity-0">
@@ -15,7 +14,7 @@ import ThemeSwitcher from "@components/base/ThemeSwitcher.astro";
         </li>
       </ul>
     </div>
-    <div class="text-center lg:col-6 lg:my-0 flex items-center justify-center lg:justify-end space-x-4">
+    <div class="text-center lg:col-6 lg:my-0 flex items-center justify-center lg:justify-end">
       <Social
         links={{
           email: "hello@example.com",
@@ -24,7 +23,6 @@ import ThemeSwitcher from "@components/base/ThemeSwitcher.astro";
           youtube: "https://www.youtube.com/@example",
         }}
       />
-      <ThemeSwitcher />
     </div>
   </div>
 </footer>

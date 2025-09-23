@@ -6,6 +6,7 @@ import ObserverScript from "@components/base/ObserverScript.astro";
 import "@/styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import Background from "@/components/base/Background.astro";
+import ThemeScript from "@components/base/ThemeScript.astro";
 import { Tooltips } from "astro-tooltips";
 
 // types for frontmatters
@@ -114,6 +115,7 @@ const baseUrl = "https://janedoe.com";
     <Tooltips interactive={false} delay={[333, 0]} />
   </head>
   <body>
+    <ThemeScript />
     <Background />
     <Header />
     <main id="main-content" class="flex-1">
