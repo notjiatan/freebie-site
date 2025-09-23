@@ -12,6 +12,7 @@
   @include meta.load-css("prose");
   @include meta.load-css("glass");
   @include meta.load-css("text-effects");
+  @include meta.load-css("electric-border");
 }
 
 @layer utilities {

@@ -10,24 +10,26 @@
 
 <style>
   body {
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+    background: linear-gradient(to bottom, #090a0f 0%, #1b2735 70%, #090a0f 100%) !important;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   #stars {
+    position: fixed;
     width: 1px;
     height: 1px;
     background: transparent;
     box-shadow: 45vw 30vh #FFF, 7vw 70vh #FFF, 98vw 105vh #FFF, 76vw 55vh #FFF, 37vw 42vh #FFF, 29vw 8vh #FFF, 72vw 74vh #FFF, 43vw 10vh #FFF, 32vw 88vh #FFF, 11vw 96vh #FFF, 82vw 27vh #FFF, 34vw 97vh #FFF, 18vw 74vh #FFF, 24vw 0vh #FFF, 95vw 9vh #FFF, 0vw 1vh #FFF, 68vw 25vh #FFF, 82vw 51vh #FFF, 20vw 48vh #FFF, 71vw 83vh #FFF;
     filter: drop-shadow(0 0 2px rgba(255,255,255,0.8));
     animation: animStar 200s linear infinite;
+    z-index: -2;
   }
 
   #stars:after {
     content: " ";
-    position: absolute;
-    top: 200vh;
+    position: fixed;
+    top: -200vh;
     width: 1px;
     height: 1px;
     background: transparent;
@@ -36,18 +38,20 @@
   }
 
   #stars2 {
+    position: fixed;
     width: 2px;
     height: 2px;
     background: transparent;
     box-shadow: 44vw 81vh #FFF, 3vw 102vh #FFF, 30vw 19vh #FFF, 18vw 71vh #FFF, 50vw 28vh #FFF, 20vw 102vh #FFF, 54vw 99vh #FFF, 6vw 89vh #FFF, 87vw 24vh #FFF, 68vw 23vh #FFF, 81vw 35vh #FFF, 67vw 102vh #FFF, 81vw 3vh #FFF, 91vw 88vh #FFF, 61vw 71vh #FFF, 49vw 24vh #FFF;
     filter: drop-shadow(0 0 3px rgba(255,255,255,0.9));
     animation: animStar 300s linear infinite;
+    z-index: -2;
   }
 
   #stars2:after {
     content: " ";
-    position: absolute;
-    top: 200vh;
+    position: fixed;
+    top: -200vh;
     width: 2px;
     height: 2px;
     background: transparent;
@@ -56,18 +60,20 @@
   }
 
   #stars3 {
+    position: fixed;
     width: 3px;
     height: 3px;
     background: transparent;
     box-shadow: 89vw 53vh #FFF, 48vw 67vh #FFF, 60vw 1vh #FFF, 72vw 16vh #FFF, 29vw 75vh #FFF, 34vw 11vh #FFF;
     filter: drop-shadow(0 0 4px rgba(255,255,255,1));
     animation: animStar 400s linear infinite;
+    z-index: -2;
   }
 
   #stars3:after {
     content: " ";
-    position: absolute;
-    top: 200vh;
+    position: fixed;
+    top: -200vh;
     width: 3px;
     height: 3px;
     background: transparent;
@@ -85,7 +91,7 @@
   }
 
   .ring {
-    position: absolute;
+    position: fixed;
     width: 4px;
     height: 150px;
     background: #FF00FF;
@@ -94,6 +100,7 @@
     box-shadow: none !important;
     filter: drop-shadow(0 0 10px #FF00FF) drop-shadow(0 0 30px #FF00FF) drop-shadow(0 0 50px #FF00FF);
     animation: flyUp 20s linear infinite;
+    z-index: -1;
   }
   
   @keyframes flyUp {
