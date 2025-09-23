@@ -13,6 +13,7 @@
   @include meta.load-css("glass");
   @include meta.load-css("text-effects");
   @include meta.load-css("electric-border");
+  @include meta.load-css("carousel");
 }
 
 @layer utilities {

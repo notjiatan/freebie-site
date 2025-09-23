@@ -1,0 +1,203 @@
+/* 
+ * Horizontal Scrolling Carousel Component
+ * Features: Auto-scrolling cards, hover to pause, responsive design, fade masking
+ */
+
+/* Carousel container with auto-scrolling animation */
+.carousel {
+  /* CSS Custom Properties for easy configuration */
+  --items: 6; /* Total number of carousel items */
+  --carousel-duration: 40s; /* Full cycle duration on mobile */
+  --carousel-width: min(80vw, 1200px); /* Responsive width with max constraint */
+  --carousel-item-width: 280px; /* Individual card width */
+  --carousel-item-height: 450px; /* Individual card height */
+  --carousel-item-gap: 2rem; /* Space between cards */
+  --clr-cta: #ff00ff; /* Call-to-action button color (matches site theme) */
+
+  /* Faster animation on larger screens */
+  @media (width > 600px) {
+    --carousel-duration: 30s;
+  }
+
+  /* Container positioning and clipping */
+  position: relative;
+  width: var(--carousel-width);
+  height: var(--carousel-item-height);
+  overflow: clip; /* Hide overflowing content */
+  margin: 0 auto; /* Center the carousel */
+
+  /* Optional fade masking on sides for smooth visual transition */
+  &[mask] {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10% 90%,
+      transparent
+    );
+  }
+
+  /* Reverse animation direction if needed */
+  &[reverse] > article {
+    animation-direction: reverse;
+  }
+
+  /* Pause animation on hover for better UX */
+  &:hover > article {
+    animation-play-state: paused;
+  }
+}
+
+/* Individual carousel cards */
+.carousel > article {
+  /* Positioning - start off-screen to the right */
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--carousel-item-gap));
+  width: var(--carousel-item-width);
+  height: var(--carousel-item-height);
+
+  /* Grid layout for card content */
+  display: grid;
+  grid-template-rows: 200px auto 1fr auto; /* Image, title, content, button */
+  gap: 0.25rem;
+
+  /* Card styling adapted for dark theme */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding-block-end: 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+
+  /* Smooth scrolling animation */
+  will-change: transform; /* Optimize for animations */
+  animation-name: marquee;
+  animation-duration: var(--carousel-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  
+  /* Stagger animation delay for each item */
+  animation-delay: calc(
+    var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
+  );
+
+  /* Individual item animation delays using CSS custom properties */
+  &:nth-child(1) { --i: 0; }
+  &:nth-child(2) { --i: 1; }
+  &:nth-child(3) { --i: 2; }
+  &:nth-child(4) { --i: 3; }
+  &:nth-child(5) { --i: 4; }
+  &:nth-child(6) { --i: 5; }
+  &:nth-child(7) { --i: 6; }
+  &:nth-child(8) { --i: 7; }
+}
+
+/* Card images */
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio while filling container */
+  border-radius: 10px 10px 0 0; /* Rounded top corners only */
+}
+
+/* Content padding for all non-image elements */
+.carousel > article > *:not(img) {
+  padding: 0 1rem;
+}
+
+/* Content wrapper using CSS subgrid for consistent alignment */
+.carousel > article > div {
+  grid-row: span 2; /* Span content and button areas */
+  display: grid;
+  grid-template-rows: subgrid; /* Inherit parent grid structure */
+  font-size: 0.8rem;
+}
+
+/* Card titles */
+.carousel > article h2 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  padding-block: 0.75rem 0.25rem;
+  margin: 0;
+  color: #fff;
+}
+
+/* Card content paragraphs */
+.carousel > article p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+/* Call-to-action buttons */
+.carousel > article a {
+  text-decoration: none;
+  text-transform: lowercase;
+  border: 1px solid var(--clr-cta);
+  color: var(--clr-cta);
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  place-self: start; /* Align to start of grid area */
+  transition: 150ms ease-in-out;
+  font-size: 0.9rem;
+  
+  /* Hover and focus states */
+  &:hover,
+  &:focus-visible {
+    background-color: var(--clr-cta);
+    color: white;
+    outline: none;
+    transform: translateY(-1px); /* Subtle lift effect */
+  }
+}
+
+/* Carousel scrolling animation keyframes */
+@keyframes marquee {
+  100% {
+    /* Move all items one full cycle to the left */
+    transform: translateX(
+      calc(
+        (var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) * -1
+      )
+    );
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .carousel {
+    --carousel-item-width: 250px; /* Smaller cards on mobile */
+    --carousel-item-height: 400px;
+    --carousel-item-gap: 1.5rem;
+    --carousel-width: 95vw; /* More width utilization on mobile */
+  }
+
+  .carousel > article h2 {
+    font-size: 1.1rem;
+  }
+
+  .carousel > article {
+    grid-template-rows: 180px auto 1fr auto; /* Adjust image height for mobile */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .carousel {
+    --carousel-item-width: 220px;
+    --carousel-item-height: 360px;
+    --carousel-item-gap: 1rem;
+  }
+
+  .carousel > article {
+    grid-template-rows: 160px auto 1fr auto;
+  }
+
+  .carousel > article h2 {
+    font-size: 1rem;
+    padding-block: 0.5rem 0.25rem;
+  }
+
+  .carousel > article > div {
+    font-size: 0.75rem;
+  }
+}
