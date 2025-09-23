@@ -37,7 +37,7 @@ const menu = [
           <li class="">
             <a
               href={item.url}
-              class={`flex flex-col items-center space-y-1 p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
+              class={`flex flex-col items-center space-y-1 lg:flex-row lg:space-y-0 lg:space-x-1 p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
                 "active"
               }`}
