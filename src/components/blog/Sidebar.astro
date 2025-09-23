@@ -1,0 +1,72 @@
+---
+import { lowerHumanize, upperHumanize } from "@lib/textConverter";
+import Button from "@components/common/Button.astro";
+
+interface Props {
+  tags: string[];
+  categories: string[];
+  allCategories: string[];
+}
+
+const { tags, categories, allCategories }: Props = Astro.props;
+---
+
+<div class="h-full overflow-y-auto">
+  <!-- categories -->
+  <div class="glass rounded-lg p-4 m-2 mb-4 intersect:animate-fadeLeft opacity-0">
+    <div>
+      <h4 class="mb-2">
+        <a href="/blog/categories">
+          <svg className="mr-1 -mt-1.5 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+           Categories
+        </a>
+      </h4>
+      <hr class="mb-2 -mt-1" />
+      <ul class="space-y-2">
+        {
+          categories.map((category) => {
+            const count = allCategories.filter((c) => c === category).length;
+            return (
+              <li>
+                <a
+                  class=""
+                  href={`/blog/categories/${category}`}
+                >
+                  {upperHumanize(category)}{" "}
+                  <div class="inline-block pl-1">({count})</div>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+  <!-- tags -->
+  <div class="glass rounded-lg p-4 m-2 intersect:animate-fadeLeft opacity-0">
+    <div>
+      <h4 class="mb-2">
+        <a href="/blog/tags">
+          <svg className="mr-1 -mt-1.5 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clip-rule="evenodd"></path></svg>
+           Tags
+        </a>
+      </h4>
+      <hr class="mb-2 -mt-1" />
+      <ul>
+        {
+          tags.map((tag: any) => {
+            return (
+              <li class="inline-block m-1">
+                <Button
+                  label={tag}
+                  link={`/blog/tags/${lowerHumanize(tag)}`}
+                  type="secondary"
+                />
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</div>

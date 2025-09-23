@@ -1,0 +1,148 @@
+---
+import readingTime from "@lib/readingTime";
+import {
+  lowerHumanize,
+  upperHumanize,
+  markdownify,
+  slugify,
+} from "@lib/textConverter";
+
+import { Image } from "astro:assets";
+import type { GenericEntry, EntryReference } from "@/types";
+
+interface EntryData {
+  title: string;
+  image?: string;
+  imageAlt?: string;
+  author?: EntryReference;
+  date?: string;
+  pubDate?: string;
+  modDate?: string;
+  categories?: string[];
+  tags?: string[];
+  complexity?: number;
+}
+
+interface Props {
+  entry: GenericEntry;
+  showInfo?: boolean;
+  showImage?: boolean;
+  showTitle?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+  showPubDate?: boolean;
+  showModDate?: boolean;
+  showReadingTime?: boolean;
+  showCategories?: boolean;
+  showTags?: boolean;
+}
+
+const {
+  entry,
+  showInfo = true,
+  showImage = false,
+  showAuthor = false,
+  showDate = false,
+  showPubDate = false,
+  showModDate = false,
+  showReadingTime = false,
+  showCategories = false,
+  showTags = false,
+}: Props = Astro.props;
+
+const {
+  title,
+  author,
+  categories,
+  tags,
+  image,
+  imageAlt,
+  date,
+  pubDate,
+  modDate,
+  complexity,
+} = entry.data as EntryData;
+
+categories?.sort((a: string, b: string) => a.localeCompare(b));
+tags?.sort((a: string, b: string) => a.localeCompare(b));
+---
+
+<div class="mt-2">
+  {
+    image && showImage && (
+      <div class="mb-8 glass rounded-lg intersect:animate-fadeDown opacity-0 intersect-no-queue">
+        <Image
+          class="w-full rounded-lg"
+          src={image}
+          alt={imageAlt || ""}
+          height={500}
+          width={1200}
+          loading="eager"
+        />
+      </div>
+    )
+  }
+  {
+    showInfo && (
+      <div class="glass mb-8 p-4 rounded-lg intersect:animate-fade opacity-0 intersect-no-queue">
+        <h1 set:html={markdownify(title)} class="mb-4" />
+        <ul>
+          {author && showAuthor && (
+            <li class="mr-1 inline-block">
+              <a href={`/authors/${slugify(author.id)}`}>
+                <svg className="-mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
+                {upperHumanize(author.id)}
+              </a>
+            </li>
+          )}
+          {date && showDate && (
+            <li class="mr-1 inline-block">
+              <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+              {new Date(date).toLocaleDateString()}
+            </li>
+          )}
+          {pubDate && showPubDate && (
+            <li class="mr-1 inline-block">
+              <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+              Published
+              {new Date(pubDate).toLocaleDateString()}
+            </li>
+          )}
+          {modDate && showModDate && (
+            <li class="mr-1 inline-block">
+              <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+              Updated
+              {new Date(modDate).toLocaleDateString()}
+            </li>
+          )}
+          {complexity && complexity > 0 && showReadingTime && (
+            <li class="mr-1 inline-block">
+              <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+              {readingTime(entry.body!, complexity)}
+            </li>
+          )}
+          {categories && showCategories && (
+            <li class="mr-1 inline-block">
+              {categories.map((category: string, index: number) => (
+                <a href={`/blog/categories/${slugify(category)}`}>
+                  <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                  {upperHumanize(category)}
+                </a>
+              ))}
+            </li>
+          )}
+          {tags && showTags && (
+            <li class="mr-1 inline-block">
+              {tags.map((tag: string, index: number) => (
+                <a href={`/blog/tags/${slugify(tag)}`}>
+                  <svg className="ml-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clip-rule="evenodd"></path></svg>
+                  {lowerHumanize(tag)}
+                </a>
+              ))}
+            </li>
+          )}
+        </ul>
+      </div>
+    )
+  }
+</div>

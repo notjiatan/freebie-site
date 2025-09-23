@@ -1,0 +1,183 @@
+---
+import type { RecipesEntry } from "@/types";
+import Share from "@components/common/Share.astro";
+import { Image } from "astro:assets";
+import BaseLayout from "@components/base/BaseLayout.astro";
+import { upperHumanize, markdownify, slugify } from "@lib/textConverter";
+
+interface Props {
+  entry: RecipesEntry;
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  author,
+  description,
+  image,
+  imageAlt,
+  prepTime,
+  servings,
+  diet,
+  ingredients,
+  instructions,
+  notes,
+} = entry.data;
+---
+
+<BaseLayout title={title} description={description} image={image?.src}>
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="lg:col-10 flex flex-wrap content-start">
+          <!-- Title -->
+          <h1 set:html={title} class="p-2 col basis-full min-w-72" />
+          <!-- Cover Photo -->
+          {
+            image && (
+              <div class="col basis-2/3 p-2 min-w-72">
+                <div class="glass rounded-lg intersect:animate-fadeDown opacity-0">
+                  <Image
+                    class="w-full rounded-lg"
+                    src={image}
+                    alt={imageAlt}
+                    width={1920}
+                    height={1080}
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            )
+          }
+          <!-- About -->
+          <section class="col basis-1/3 p-2 min-w-72">
+            <div class="glass rounded-lg p-2 h-full intersect:animate-fadeUp opacity-0">
+              <!-- Author -->
+              {
+                author && (
+                  <div class="m-4">
+                    <a href={`/authors/${slugify(author.id)}`}>
+                      <svg className="mr-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
+                      {upperHumanize(author.id)}
+                    </a>
+                  </div>
+                )
+              }
+              <!-- Prep Time -->
+              {
+                prepTime && (
+                  <div class="m-4">
+                    <svg className="mr-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    {prepTime + " minutes"}
+                  </div>
+                )
+              }
+              <!-- Servings -->
+              {
+                servings && (
+                  <div class="m-4">
+                    <svg className="mr-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path></svg>
+                    {servings === 1 ? "1 serving" : servings + " servings"}
+                  </div>
+                )
+              }
+              <!-- Diet -->
+              {
+                diet && (
+                  <div class="m-4">
+                    <svg className="mr-2 -mt-1 inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" clip-rule="evenodd"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+                    {diet}
+                  </div>
+                )
+              }
+              <!-- Description -->
+              {
+                description && (
+                  <div>
+                    {author || prepTime || servings || diet ? (
+                      <hr class="my-2" />
+                    ) : null}
+                    <div class="m-4">
+                      <div set:html={markdownify(description)} />
+                    </div>
+                  </div>
+                )
+              }
+            </div>
+          </section>
+          <!-- Ingredients -->
+          {
+            ingredients && (
+              <section class="col basis-1/3 p-2 min-w-72">
+                <div class="glass rounded-lg p-4 intersect:animate-fadeUp opacity-0">
+                  <h2 set:html="Ingredients" class="mb-2" />
+                  <div class="row justify-center">
+                    {ingredients.list.map((it: string, index: number) => (
+                      <div class="row my-1">
+                        <div class="col-7" set:html={ingredients.list[index]} />
+                        <div
+                          class="col-5 text-right"
+                          set:html={ingredients.qty[index]}
+                        />
+                        <hr class="my-1" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )
+          }
+          <!-- Instructions -->
+          {
+            instructions && (
+              <section class="col basis-full p-2 min-w-72">
+                <div class="glass rounded-lg p-4 intersect:animate-fadeUp opacity-0">
+                  <h2 set:html="Instructions" class="mb-2" />
+                  <div class="row justify-center">
+                    {instructions.map((it: string, index: number) => (
+                      <div class="row my-1">
+                        <div class="col">
+                          {index + 1}. {it}
+                        </div>
+                        <hr class="my-1" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )
+          }
+          <!-- Notes -->
+          {
+            notes && (
+              <section class="col basis-full p-2 min-w-72">
+                <div class="glass rounded-lg p-4 intersect:animate-fadeUp opacity-0">
+                  <h2 set:html="Notes" class="mb-2" />
+                  <div class="row justify-center">
+                    {notes.map((it: string, index: number) => (
+                      <div class="row my-1">
+                        <div class="col">{it}</div>
+                        <hr class="my-1" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )
+          }
+        </article>
+        <!-- Share -->
+        <div
+          class="flex col-10 p-2 items-center justify-center lg:justify-end px-6"
+        >
+          <Share
+            title={title}
+            description={description}
+            folder="recipes"
+            id={entry.id}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
