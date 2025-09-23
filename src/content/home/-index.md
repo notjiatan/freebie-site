@@ -1,9 +1,9 @@
 ---
 image: "@assets/astrogon-star.svg"
 imageAlt: Astrogon logo
-title: Astrogon
-content: A rapidly-customizable template for a blog, documentation, and more.
+title: Freebie Finders
+content: We Make Things 100% Off!
 button:
-  label: See the Code
-  link: https://github.com/astrogon/astrogon
+  label: Our Product
+  link: https://github.com/
 ---
