@@ -1,6 +1,5 @@
 ---
-image: "@assets/astrogon-star.svg"
-imageAlt: Astrogon logo
+image: "@assets/logo.png"
 title: Freebie Finders
 content: We Make Things 100% Off!
 button:
