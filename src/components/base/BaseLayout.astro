@@ -1,6 +1,5 @@
 ---
 import { plainify } from "@lib/textConverter";
-import Footer from "@components/base/Footer.astro";
 import Header from "@components/base/Header.astro";
 import ObserverScript from "@components/base/ObserverScript.astro";
 import "@/styles/main.scss";
@@ -121,7 +120,6 @@ const baseUrl = "https://janedoe.com";
     <main id="main-content" class="flex-1">
       <slot/>
     </main>
-    <Footer />
     <!-- <ObserverScript /> -->
   </body>
 </html>

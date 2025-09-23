@@ -2,6 +2,7 @@
 import BaseLayout from "@components/base/BaseLayout.astro";
 import { markdownify } from "@lib/textConverter";
 import Button from "@components/common/Button.astro";
+import Footer from "@components/base/Footer.astro";
 import type { HomeEntry } from "@/types";
 import { Image } from "astro:assets";
 
@@ -52,3 +53,5 @@ const { image, imageAlt, title, content, button } = entry.data;
     </div>
   </section>
 </BaseLayout>
+
+<Footer />
