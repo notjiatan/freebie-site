@@ -122,10 +122,6 @@ module.exports = {
         fadeRight: "fadeInRight 1000ms both",
         fadeLeft: "fadeInLeft 1000ms both",
         scale: "scaleOut 1000ms both",
-        // Star Background
-        twinkle: "twinkle 5s infinite ease-in-out",
-        // Cycle Background
-        cycleBg: "cycleBg 60s ease infinite",
       },
       keyframes: {
         // Intersect
@@ -152,16 +148,6 @@ module.exports = {
         scaleOut: {
           "0%": { opacity: 0, transform: "scale(0.5)" },
           "100%": { opacity: 1, transform: "scale(1)" },
-        },
-        // Star Background
-        twinkle: {
-          "0%, 20%, 100%": { opacity: 1 },
-          "10%": { opacity: 0.25 },
-        },
-        // Cycle Background
-        cycleBg: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
         },
       },
     },
