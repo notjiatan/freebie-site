@@ -1,5 +1,4 @@
 ---
-import ThemeSwitcher from "@components/base/ThemeSwitcher.astro";
 
 const { pathname } = Astro.url;
 
@@ -9,10 +8,6 @@ const menu = [
   {
     name: "Home",
     url: "/",
-  },
-  {
-    name: "Terms",
-    url: "/terms",
   },
 ];
 ---
@@ -60,8 +55,5 @@ const menu = [
         ))
       }
     </ul>
-    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
-      <ThemeSwitcher />
-    </div>
   </nav>
 </header>
