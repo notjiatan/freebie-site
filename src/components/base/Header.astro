@@ -25,7 +25,7 @@ const menu = [
 
 <header
   transition:persist
-  class={`container glass py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg ${stickyHeader && "sticky top-0"}`}
+  class={`container max-w-2xl lg:max-w-3xl glass py-1 lg:py-0 z-30 mb-4 lg:mt-4 lg:rounded-lg ${stickyHeader && "sticky top-0"}`}
 >
   <nav class="relative flex flex-wrap items-center justify-between">
     <ul
@@ -37,7 +37,7 @@ const menu = [
           <li class="">
             <a
               href={item.url}
-              class={`flex items-center space-x-1 p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
+              class={`flex flex-col items-center space-y-1 p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
                 "active"
               }`}
