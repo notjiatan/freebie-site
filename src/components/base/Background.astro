@@ -2,6 +2,8 @@
 // Custom Starfield Background
 ---
 
+<div class="ring ring-left"></div>
+<div class="ring ring-right"></div>
 <div id="stars"></div>
 <div id="stars2"></div>
 <div id="stars3"></div>
@@ -80,5 +82,49 @@
     to {
       transform: translateY(-3000px);
     }
+  }
+
+  .ring {
+    position: absolute;
+    width: 4px;
+    height: 150px;
+    background: #FF00FF;
+    border: none;
+    filter: drop-shadow(0 0 10px #FF00FF) drop-shadow(0 0 30px #FF00FF) drop-shadow(0 0 50px #FF00FF);
+    animation: flyUp 20s linear infinite;
+  }
+  
+  @keyframes flyUp {
+    0% {
+      transform: translateY(100vh);
+    }
+    100% {
+      transform: translateY(-100vh);
+    }
+  }
+  
+  .ring::before {
+    content: "🍔🆓";
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    color: #FF00FF;
+    font-size: 2em;
+  }
+
+  .ring-left {
+    left: 50px;
+  }
+
+  .ring-right {
+    right: 50px;
+    background: #FF70FF;
+    filter: drop-shadow(0 0 10px #FF70FF) drop-shadow(0 0 30px #FF70FF) drop-shadow(0 0 50px #FF70FF);
+    animation-delay: -10s;
+  }
+  
+  .ring-right::before {
+    content: "🍟";
+    color: #FF70FF;
   }
 </style>
