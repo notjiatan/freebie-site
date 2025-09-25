@@ -1,16 +1,212 @@
 ---
 import BaseLayout from "@components/base/BaseLayout.astro";
+import Button from "@components/common/Button.astro";
 ---
 
-<BaseLayout title="Login">
-  <section class="section">
+<BaseLayout title="Login & Sign Up">
+  <!-- Login/Signup Toggle Section -->
+  <section class="section pt-20">
     <div class="container">
       <div class="row justify-center">
-        <div class="text-center lg:col-6">
-          <h1 class="mb-4">Login</h1>
-          <p class="mb-8">Login page & Sign-Up</p>
+        <div class="lg:col-5">
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <h1 class="mb-4 neon-title flicker-text">Welcome Back</h1>
+          </div>
+
+          <!-- Toggle Buttons -->
+          <div class="flex justify-center mb-8">
+            <div class="glass-t rounded-lg p-1 flex">
+              <button id="loginTab" class="auth-tab active px-6 py-2 rounded-md transition-all duration-300">Login</button>
+              <button id="signupTab" class="auth-tab px-6 py-2 rounded-md transition-all duration-300">Sign Up</button>
+            </div>
+          </div>
+
+          <!-- Login Form -->
+          <div id="loginForm" class="auth-form">
+            <form class="glass rounded-lg p-8 space-y-6">
+              <div class="space-y-4">
+                <div>
+                  <label for="loginEmail" class="block text-sm font-medium text-txt-p dark:text-darkmode-txt-p mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="loginEmail" 
+                    name="email" 
+                    required 
+                    class="w-full px-4 py-3 rounded-md glass-t border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none text-txt-p dark:text-darkmode-txt-p placeholder-txt-light dark:placeholder-darkmode-txt-light transition-all duration-300"
+                    placeholder="Enter your email"
+                  >
+                </div>
+                <div>
+                  <label for="loginPassword" class="block text-sm font-medium text-txt-p dark:text-darkmode-txt-p mb-2">Password</label>
+                  <input 
+                    type="password" 
+                    id="loginPassword" 
+                    name="password" 
+                    required 
+                    class="w-full px-4 py-3 rounded-md glass-t border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none text-txt-p dark:text-darkmode-txt-p placeholder-txt-light dark:placeholder-darkmode-txt-light transition-all duration-300"
+                    placeholder="Enter your password"
+                  >
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-sm">
+                <label class="flex items-center">
+                  <input type="checkbox" checked class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                  <span class="ml-2 text-txt-light dark:text-darkmode-txt-light">Remember me</span>
+                </label>
+                <a href="#" class="text-purple-400 hover:text-purple-300 transition-colors">Forgot password?</a>
+              </div>
+
+              <div class="pt-4">
+                <button type="submit" class="w-full px-4 py-3 rounded-md font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  Sign In
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Signup Form -->
+          <div id="signupForm" class="auth-form hidden">
+            <form class="glass rounded-lg p-8 space-y-6">
+              <div class="space-y-4">
+                <div>
+                  <label for="signupEmail" class="block text-sm font-medium text-txt-p dark:text-darkmode-txt-p mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="signupEmail" 
+                    name="email" 
+                    required 
+                    class="w-full px-4 py-3 rounded-md glass-t border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none text-txt-p dark:text-darkmode-txt-p placeholder-txt-light dark:placeholder-darkmode-txt-light transition-all duration-300"
+                    placeholder="Enter your email"
+                  >
+                </div>
+                <div>
+                  <label for="signupPassword" class="block text-sm font-medium text-txt-p dark:text-darkmode-txt-p mb-2">Password</label>
+                  <input 
+                    type="password" 
+                    id="signupPassword" 
+                    name="password" 
+                    required 
+                    class="w-full px-4 py-3 rounded-md glass-t border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none text-txt-p dark:text-darkmode-txt-p placeholder-txt-light dark:placeholder-darkmode-txt-light transition-all duration-300"
+                    placeholder="Create a password"
+                  >
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <input type="checkbox" id="terms" required class="mt-1 rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                <label for="terms" class="ml-2 text-sm text-txt-light dark:text-darkmode-txt-light">
+                  I agree to the <a href="/terms" class="text-purple-400 hover:text-purple-300 transition-colors">ToS</a>, <a href="/terms" class="text-purple-400 hover:text-purple-300 transition-colors">PP<a href="/cookies"<a/> & <a class="text-purple-400 hover:text-purple-300 transition-colors"> Cookies</a> which will be used</a>
+                </label>
+              </div>
+
+              <div class="pt-4">
+                <button type="submit" class="w-full px-4 py-3 rounded-md font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  Create Account
+                </button>
+              </div>
+            </form>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Tab switching functionality
+  const loginTab = document.getElementById('loginTab');
+  const signupTab = document.getElementById('signupTab');
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+
+  function switchToLogin() {
+    loginTab?.classList.add('active');
+    signupTab?.classList.remove('active');
+    loginForm?.classList.remove('hidden');
+    signupForm?.classList.add('hidden');
+  }
+
+  function switchToSignup() {
+    signupTab?.classList.add('active');
+    loginTab?.classList.remove('active');
+    signupForm?.classList.remove('hidden');
+    loginForm?.classList.add('hidden');
+  }
+
+  loginTab?.addEventListener('click', switchToLogin);
+  signupTab?.addEventListener('click', switchToSignup);
+
+  // Form validation
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Basic validation
+      const formData = new FormData(form);
+      const email = formData.get('email');
+      const password = formData.get('password');
+      
+      if (!email || !password) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+      
+      // For signup form, check password strength and terms
+      if (form.querySelector('#terms')) {
+        // Password strength check
+        if (password.length < 8) {
+          alert('Password must be at least 8 characters long');
+          return;
+        }
+        
+        // Check terms agreement
+        const termsChecked = form.querySelector('#terms')?.checked;
+        if (!termsChecked) {
+          alert('Please agree to the Terms of Service and Privacy Policy & Cookies');
+          return;
+        }
+      }
+      
+      // Check for test login credentials
+      if (email === 'test@test.com' && password === 'test' && !form.querySelector('#terms')) {
+        // Redirect to dashboard for successful test login
+        window.location.href = '/dashboard';
+        return;
+      }
+      
+      // If validation passes, show success message
+      alert('Form submitted successfully! (This is a demo)');
+    });
+  });
+</script>
+
+<style>
+  .auth-tab {
+    @apply text-txt-light dark:text-darkmode-txt-light transition-all duration-300;
+  }
+  
+  .auth-tab.active {
+    @apply text-txt-p dark:text-darkmode-txt-p bg-bg-p dark:bg-darkmode-bg-p shadow-md;
+  }
+  
+  .auth-form {
+    @apply transition-all duration-300;
+  }
+  
+  /* Custom focus states for inputs */
+  input:focus {
+    box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.5);
+  }
+  
+</style>

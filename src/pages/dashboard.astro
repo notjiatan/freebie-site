@@ -1,0 +1,144 @@
+---
+import BaseLayout from "@components/base/BaseLayout.astro";
+import Button from "@components/common/Button.astro";
+---
+
+<BaseLayout title="Dashboard - Freebie Finders">
+  <!-- Dashboard Header -->
+  <section class="section pt-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center mb-8">
+            <h1 class="mb-4 neon-title flicker-text">Your Dashboard</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Stats -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 lg:col-3">
+          <div class="glass rounded-lg p-6 text-center mb-6">
+            <div class="text-3xl font-bold text-purple-400 mb-2">0</div>
+            <div class="text-txt-light dark:text-darkmode-txt-light">Freebies Found</div>
+          </div>
+        </div>
+        <div class="col-12 lg:col-3">
+          <div class="glass rounded-lg p-6 text-center mb-6">
+            <div class="text-3xl font-bold text-purple-400 mb-2">0</div>
+            <div class="text-txt-light dark:text-darkmode-txt-light">This Week</div>
+          </div>
+        </div>
+        <div class="col-12 lg:col-3">
+          <div class="glass rounded-lg p-6 text-center mb-6">
+            <div class="text-3xl font-bold text-purple-400 mb-2">0</div>
+            <div class="text-txt-light dark:text-darkmode-txt-light">Value Saved</div>
+          </div>
+        </div>
+        <div class="col-12 lg:col-3">
+          <div class="glass rounded-lg p-6 text-center mb-6">
+            <div class="text-3xl font-bold text-purple-400 mb-2">0</div>
+            <div class="text-txt-light dark:text-darkmode-txt-light">Categories</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Recent Activity -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 lg:col-8">
+          <h2 class="text-h3 font-bold text-txt-p dark:text-darkmode-txt-p mb-6">Recent Activity</h2>
+          <div class="glass rounded-lg p-6">
+            <div class="space-y-4">
+              <div class="flex items-center py-3 border-b border-txt-light dark:border-darkmode-txt-light border-opacity-20">
+                <div class="flex items-center space-x-4">
+                  <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                  </div>
+                  <div>
+                    <p class="font-medium text-txt-p dark:text-darkmode-txt-p">Sample</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center py-3 border-b border-txt-light dark:border-darkmode-txt-light border-opacity-20">
+                <div class="flex items-center space-x-4">
+                  <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                  </div>
+                  <div>
+                    <p class="font-medium text-txt-p dark:text-darkmode-txt-p">Sample</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center py-3">
+                <div class="flex items-center space-x-4">
+                  <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                  </div>
+                  <div>
+                    <p class="font-medium text-txt-p dark:text-darkmode-txt-p">Sample</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-12 lg:col-4">
+          <div class="space-y-6">
+            <!-- Profile Card -->
+            <div class="glass rounded-lg p-6">
+              <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-white">T</span>
+                </div>
+                <h3 class="font-semibold text-txt-p dark:text-darkmode-txt-p mb-4">Test User</h3>
+                <button class="glass-t rounded-md px-4 py-2 hover:bg-opacity-40 transition-all duration-300 text-txt-p dark:text-darkmode-txt-p">
+                  Settings
+                </button>
+              </div>
+            </div>
+
+
+            <!-- Logout -->
+            <div class="glass rounded-lg p-6">
+              <Button
+                label="Sign Out"
+                link="/login"
+                type="primary"
+                glass={false}
+                hoverInvert={true}
+                color="bg-gradient-to-r from-red-600 to-pink-600"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Dashboard specific animations */
+  .glass:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Gradient text for stats */
+  .text-purple-400 {
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
