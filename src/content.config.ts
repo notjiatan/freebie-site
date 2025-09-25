@@ -30,8 +30,14 @@ const terms = defineCollection({
   schema: searchable,
 });
 
+const resetEmail = defineCollection({
+  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/reset-email" }),
+  schema: searchable,
+});
+
 // Export collections
 export const collections = {
   home,
   terms,
+  "reset-email": resetEmail,
 };

@@ -1,0 +1,9 @@
+---
+import EntryLayout from "@components/reset-email/EntryLayout.astro";
+import { getIndex } from "@lib/contentParser";
+import type { ResetEmailEntry } from "@/types";
+
+const entry = await getIndex("reset-email") as ResetEmailEntry;
+---
+
+<EntryLayout entry={entry} />

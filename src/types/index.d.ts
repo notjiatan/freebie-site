@@ -5,6 +5,7 @@ export type GenericEntry = CollectionEntry<CollectionKey>;
 
 export type HomeEntry = CollectionEntry<"home">;
 export type TermsEntry = CollectionEntry<"terms">;
+export type ResetEmailEntry = CollectionEntry<"reset-email">;
 
 export type SocialLinks = {
   discord?: string;
