@@ -1,5 +1,4 @@
 import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
@@ -11,7 +10,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true
   },
-  integrations: [sitemap(), tailwind({
+  integrations: [tailwind({
     config: {
       applyBaseStyles: false
     }
