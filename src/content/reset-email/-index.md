@@ -7,7 +7,7 @@ description: Instructions for resetting your email address
 
 To reset your email address, please contact our support team at:
 
-**<ffinders@duck.com>**
+**<fondness-shirt-oak@duck.com>**
 
 Include the following information in your request:
 
