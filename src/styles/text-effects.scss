@@ -28,6 +28,7 @@
     0 0 120px #ff00ff;
   animation: flicker 5s infinite 0.75s !important;
   opacity: 1 !important;
+  will-change: opacity;
 }
 
 /* Override template fade animation for flicker text */
@@ -36,7 +37,21 @@ h1.flicker-text {
   opacity: 1 !important;
 }
 
-/* Flickering animation - Modified to start immediately */
+/* Optimized animation on mobile - use opacity instead of text-shadow */
+@media (max-width: 768px) {
+  .flicker-text,
+  h1.flicker-text {
+    animation: flicker-mobile 5s infinite 0.75s;
+    /* Reduced text-shadow layers for mobile */
+    text-shadow:
+      0 0 5px #ff99ff,
+      0 0 10px #ff66ff,
+      0 0 20px #ff33ff,
+      0 0 40px #ff00ff;
+  }
+}
+
+/* Desktop flickering animation - full text-shadow effect */
 @keyframes flicker {
   0%, 2%, 4%, 96%, 98%, 100% {
     text-shadow:
@@ -49,10 +64,21 @@ h1.flicker-text {
       0 0 78px #ff00ff,
       0 0 118px #ff00ff;
   }
-  
-  1%, 3%, 97% {        
+
+  1%, 3%, 97% {
     text-shadow: none;
-  }    
+  }
+}
+
+/* Mobile flickering animation - opacity-based (much more performant) */
+@keyframes flicker-mobile {
+  0%, 2%, 4%, 96%, 98%, 100% {
+    opacity: 1;
+  }
+
+  1%, 3%, 97% {
+    opacity: 0.3;
+  }
 }
 
 /* Title styling from index.html */
