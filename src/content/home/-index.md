@@ -1,8 +1,8 @@
 ---
 image: "@assets/logo.svg"
 title: Freebie Finders
-content: We Make Things 100% Off!
+content: We Make The Stuff You Buy 100% Off!
 button:
-  label: Testimonial Proof & Vouches
+  label: 👉 View Full Collection of Testimonial Proof & Vouches (Over 1000!)
   link: https://revolt
 ---

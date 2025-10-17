@@ -35,9 +35,26 @@ const resetEmail = defineCollection({
   schema: searchable,
 });
 
+const whatWeOffer = defineCollection({
+  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/what-we-offer" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    offerings: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: z.string().optional(),
+        brandIcons: z.array(z.string()).optional(),
+      })
+    ),
+  }),
+});
+
 // Export collections
 export const collections = {
   home,
   terms,
   "reset-email": resetEmail,
+  "what-we-offer": whatWeOffer,
 };

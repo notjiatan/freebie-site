@@ -1,4 +1,4 @@
-/* Electric Border Card Component */
+/* Pricing Cards Component */
 
 /* CSS Variables for electric border effects */
 :root {
@@ -10,11 +10,49 @@
   --color-neutral-900: oklch(0.185 0 0);
 }
 
+/* Simple Card (Free Tier) */
+.simple-card-container {
+  padding: 2px;
+  border-radius: 24px;
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.simple-card-content {
+  width: 100%;
+  height: auto;
+  min-height: 350px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.simple-badge {
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  transition: background 0.3s ease;
+  border-radius: 14px;
+  width: fit-content;
+  height: fit-content;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Electric border card container */
 .electric-card-container {
   padding: 2px;
   border-radius: 24px;
   position: relative;
+  width: 100%;
+  max-width: 450px;
   background: linear-gradient(
       -30deg,
       var(--gradient-color),
@@ -43,8 +81,9 @@
 
 /* Main card with turbulent displacement filter */
 .electric-main-card {
-  width: 350px;
-  min-height: 300px;
+  width: 100%;
+  max-width: 450px;
+  min-height: 350px;
   height: auto;
   border-radius: 24px;
   border: 2px solid var(--electric-border-color);
@@ -90,17 +129,14 @@
   right: 0;
   bottom: 0;
   border-radius: 24px;
-  opacity: 1;
-  mix-blend-mode: overlay;
-  transform: scale(1.1);
-  filter: blur(16px);
-  background: linear-gradient(
-    -30deg,
-    white,
-    transparent 30%,
-    transparent 70%,
-    white
+  opacity: 0.4;
+  filter: blur(20px);
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--electric-border-color),
+    transparent 70%
   );
+  pointer-events: none;
 }
 
 .electric-overlay-2 {
@@ -112,17 +148,14 @@
   right: 0;
   bottom: 0;
   border-radius: 24px;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-  transform: scale(1.1);
-  filter: blur(16px);
-  background: linear-gradient(
-    -30deg,
-    white,
-    transparent 30%,
-    transparent 70%,
-    white
+  opacity: 0.3;
+  filter: blur(30px);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(221, 132, 72, 0.8),
+    transparent 60%
   );
+  pointer-events: none;
 }
 
 /* Background glow effect */
@@ -135,15 +168,13 @@
   right: 0;
   bottom: 0;
   border-radius: 24px;
-  filter: blur(32px);
-  transform: scale(1.1);
-  opacity: 0.3;
+  filter: blur(40px);
+  opacity: 0.5;
   z-index: -1;
-  background: linear-gradient(
-    -30deg,
-    var(--electric-light-color),
-    transparent,
-    var(--electric-border-color)
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--electric-border-color),
+    transparent 70%
   );
 }
 
@@ -165,7 +196,7 @@
 .electric-content-top {
   display: flex;
   flex-direction: column;
-  padding: 48px;
+  padding: 32px 24px;
   padding-bottom: 2px;
   flex: 1;
 }
@@ -173,8 +204,7 @@
 .electric-content-bottom {
   display: flex;
   flex-direction: column;
-  padding: 48px;
-  padding-top: 8px;
+  padding: 8px 24px 32px 24px;
 }
 
 /* Glass effect badge */
@@ -231,15 +261,19 @@
 
 /* Typography styles for electric card */
 .electric-title {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 500;
   margin-top: auto;
   color: white;
+  margin-bottom: 0;
 }
 
 .electric-description {
   opacity: 0.5;
   color: white;
+  font-size: 14px;
+  line-height: 1.6;
+  word-wrap: break-word;
 }
 
 /* Divider with gradient fade effect */
@@ -258,25 +292,69 @@
   );
 }
 
-/* Responsive design for electric card */
+/* Responsive design for cards */
 @media (max-width: 768px) {
-  .electric-main-card {
-    width: 300px;
-    min-height: 300px;
+  .simple-card-container,
+  .electric-card-container {
+    max-width: 340px;
   }
-  
+
+  .simple-card-content,
+  .electric-main-card {
+    width: 100%;
+    max-width: 340px;
+    min-height: 320px;
+  }
+
   .electric-content-top {
-    padding: 32px;
+    padding: 24px 20px;
     padding-bottom: 2px;
   }
-  
+
   .electric-content-bottom {
-    padding: 32px;
-    padding-top: 2px;
-    padding-bottom: 48px;
+    padding: 8px 20px 24px 20px;
   }
-  
+
   .electric-title {
-    font-size: 28px;
+    font-size: 24px;
+  }
+
+  .electric-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-card-container,
+  .electric-card-container {
+    max-width: 300px;
+  }
+
+  .simple-card-content,
+  .electric-main-card {
+    max-width: 300px;
+  }
+
+  .electric-content-top {
+    padding: 20px 16px;
+    padding-bottom: 2px;
+  }
+
+  .electric-content-bottom {
+    padding: 8px 16px 20px 16px;
+  }
+
+  .electric-title {
+    font-size: 22px;
+  }
+
+  .electric-description {
+    font-size: 12px;
+  }
+
+  .simple-badge,
+  .electric-scrollbar-glass {
+    font-size: 12px;
+    padding: 6px 12px;
   }
 }

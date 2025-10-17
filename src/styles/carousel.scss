@@ -9,8 +9,8 @@
   --items: 6; /* Total number of carousel items */
   --carousel-duration: 40s; /* Full cycle duration on mobile */
   --carousel-width: min(80vw, 1200px); /* Responsive width with max constraint */
-  --carousel-item-width: 280px; /* Individual card width */
-  --carousel-item-height: 450px; /* Individual card height */
+  --carousel-item-width: 300px; /* Individual card width */
+  --carousel-item-height: 380px; /* Individual card height */
   --carousel-item-gap: 2rem; /* Space between cards */
   --clr-cta: #ff00ff; /* Call-to-action button color (matches site theme) */
 
@@ -58,8 +58,8 @@
 
   /* Grid layout for card content */
   display: grid;
-  grid-template-rows: 200px auto 1fr auto; /* Image, title, content, button */
-  gap: 0.25rem;
+  grid-template-rows: 180px auto 1fr; /* Image, title, content */
+  gap: 0.5rem;
 
   /* Card styling adapted for dark theme */
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -114,8 +114,8 @@
 
 /* Card titles */
 .carousel > article h2 {
-  font-size: 1.2rem;
-  font-weight: 300;
+  font-size: 1.5rem;
+  font-weight: 600;
   padding-block: 0.75rem 0.25rem;
   margin: 0;
   color: #fff;
@@ -125,7 +125,8 @@
 .carousel > article p {
   margin: 0;
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.4;
+  line-height: 1.5;
+  font-size: 1rem;
 }
 
 /* Call-to-action buttons */
@@ -165,39 +166,43 @@
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .carousel {
-    --carousel-item-width: 250px; /* Smaller cards on mobile */
-    --carousel-item-height: 400px;
+    --carousel-item-width: 270px; /* Smaller cards on mobile */
+    --carousel-item-height: 360px;
     --carousel-item-gap: 1.5rem;
     --carousel-width: 95vw; /* More width utilization on mobile */
   }
 
   .carousel > article h2 {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
+  }
+
+  .carousel > article p {
+    font-size: 0.95rem;
   }
 
   .carousel > article {
-    grid-template-rows: 180px auto 1fr auto; /* Adjust image height for mobile */
+    grid-template-rows: 160px auto 1fr; /* Adjust image height for mobile */
   }
 }
 
 /* Extra small screens */
 @media (max-width: 480px) {
   .carousel {
-    --carousel-item-width: 220px;
-    --carousel-item-height: 360px;
+    --carousel-item-width: 240px;
+    --carousel-item-height: 340px;
     --carousel-item-gap: 1rem;
   }
 
   .carousel > article {
-    grid-template-rows: 160px auto 1fr auto;
+    grid-template-rows: 140px auto 1fr;
   }
 
   .carousel > article h2 {
-    font-size: 1rem;
+    font-size: 1.25rem;
     padding-block: 0.5rem 0.25rem;
   }
 
-  .carousel > article > div {
-    font-size: 0.75rem;
+  .carousel > article p {
+    font-size: 0.9rem;
   }
 }
