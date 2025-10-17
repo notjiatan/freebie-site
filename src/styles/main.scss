@@ -18,6 +18,8 @@
   @include meta.load-css("section-title");
   @include meta.load-css("how-it-works");
   @include meta.load-css("stats");
+  @include meta.load-css("pricing-table");
+  @include meta.load-css("iframe-loading");
 }
 
 @layer utilities {
