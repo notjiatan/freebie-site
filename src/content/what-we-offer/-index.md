@@ -3,32 +3,32 @@ title: Services Provided To You
 offerings:
   - title: Free Subscription Services & Accounts
     description: "• We give you Subscription Accounts from your favorite services<br>• We Upgrade Your EXISTING Subscription Accounts"
-    icon: https://cdn.simpleicons.org/playstation/white
+    icon: /svg/subscription.svg
     brandIcons:
-      - https://cdn.simpleicons.org/netflix/white
+      - https://cdn.simpleicons.org/netflix/E50914
+      - https://cdn.simpleicons.org/spotify/1DB954
+      - https://cdn.simpleicons.org/applemusic/FA243C
+      - /svg/more.svg
   - title: Discounts & Deals
-    description: TMP
-    icon: https://cdn.simpleicons.org/cashapp/white
+    description: "• We ONLY provide HEAVILY discounted offers & codes<br>• 75% off, 80% off, USUALLY MORE"
+    icon: /svg/discount.svg
     brandIcons:
-      - https://cdn.simpleicons.org/amazon/white
+      - /svg/more.svg
   - title: Free Food & Items You Would Normally Have To Pay For
-    description: TMP
-    icon: https://cdn.simpleicons.org/deliveroo/white
+    description: "---"
+    icon: /svg/food.svg
     brandIcons:
-      - https://cdn.simpleicons.org/mcdonalds/white
+      - https://cdn.simpleicons.org/mcdonalds/FBC817
+      - https://cdn.simpleicons.org/kfc/F40027
+      - https://cdn.simpleicons.org/burgerking/D62300
+      - /svg/more.svg
   - title: Guides on how to make money from services that businesses offer
-    description: TMP
-    icon: https://cdn.simpleicons.org/keycdn/white
-    brandIcons:
-      - https://cdn.simpleicons.org/crunchyroll/white
+    description: "• Our guides genuinely make our memembers LEGIATMATE money LEGALLY, we find and sign-up bonues that businesses are offering<br>-<br>• You can look at all of our sucesses in the vouches channel under 'Guides'"
+    icon: /svg/money.svg
   - title: A Public Community Chat
-    description: Join our active community to share tips, find deals, and get help from fellow freebie hunters.
-    icon: https://cdn.simpleicons.org/discord/white
-    brandIcons:
-      - https://cdn.simpleicons.org/discord/white
+    description: "• A Public Chatroom (basically like discord), where all our members & subscribers hang out & talk about anything<br>• They usually discuss the sign-up bonus guides & help each other out"
+    icon: /svg/chat.svg
   - title: 24/7 Customer Service
-    description: Get assistance whenever you need it with our dedicated support team available around the clock.
-    icon: https://cdn.simpleicons.org/headspace/white
-    brandIcons:
-      - https://cdn.simpleicons.org/livejournal/white
+    description: "• We have a few support staff who you can summon to help you"
+    icon: /svg/phone.svg
 ---
