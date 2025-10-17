@@ -167,7 +167,7 @@ const menu = [
   /* Show on all screen sizes */
   @media (max-width: 768px) {
     #toc-container {
-      top: 70px;
+      top: 90px;
       padding: 0 1rem;
     }
 
@@ -281,21 +281,24 @@ const menu = [
 
     // Track active section on scroll
     const sections = [
-      { id: 'proof-testimonials', name: 'Proof & Testimonials', selector: '.section:nth-of-type(1)' },
-      { id: 'featured-services', name: 'Featured Services', selector: '.section:nth-of-type(2)' },
-      { id: 'how-it-works', name: 'How It Works', selector: '.section:nth-of-type(3)' },
-      { id: 'what-we-offer', name: 'Services Provided To You', selector: '.section:nth-of-type(4)' },
-      { id: 'tiers', name: 'Tiers', selector: '.section:nth-of-type(5)' },
-      { id: 'our-stats', name: 'Our Stats', selector: '.section:nth-of-type(6)' },
+      { id: 'proof-testimonials', name: 'Proof & Testimonials' },
+      { id: 'featured-services', name: 'Featured Services' },
+      { id: 'how-it-works', name: 'How It Works' },
+      { id: 'what-we-offer', name: 'Services Provided To You' },
+      { id: 'tiers', name: 'Tiers' },
+      { id: 'our-stats', name: 'Our Stats' },
     ];
 
     function updateActiveSection() {
       const scrollPos = window.scrollY + window.innerHeight / 3;
 
       for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.querySelector(sections[i].selector) as HTMLElement;
+        const section = document.getElementById(sections[i].id) as HTMLElement;
         if (section && section.offsetTop <= scrollPos) {
-          currentSection.textContent = sections[i].name;
+          const currentSectionEl = document.getElementById('current-section');
+          if (currentSectionEl) {
+            currentSectionEl.textContent = sections[i].name;
+          }
 
           // Update active state in dropdown
           tocItems.forEach(item => {
