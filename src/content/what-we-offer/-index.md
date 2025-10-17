@@ -1,5 +1,5 @@
 ---
-title: Services Provided To You
+title: Services We Provide To You
 offerings:
   - title: Free Subscription Services & Accounts
     description: "• We give you Subscription Accounts from your favorite services<br>• We Upgrade Your EXISTING Subscription Accounts"
@@ -22,7 +22,7 @@ offerings:
       - https://cdn.simpleicons.org/kfc/F40027
       - https://cdn.simpleicons.org/burgerking/D62300
       - /svg/more.svg
-  - title: Guides on how to make money from services that businesses offer
+  - title: Guides on how to make money from Sign-Up bonues that businesses offer
     description: "• Our guides genuinely make our memembers LEGIATMATE money LEGALLY, we find and sign-up bonues that businesses are offering<br>-<br>• You can look at all of our sucesses in the vouches channel under 'Guides'"
     icon: /svg/money.svg
   - title: A Public Community Chat
