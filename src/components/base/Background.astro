@@ -67,6 +67,13 @@
     color: #FF70FF;
   }
 
+  /* Hide flying emojis on mobile */
+  @media (max-width: 768px) {
+    .ring {
+      display: none;
+    }
+  }
+
   /* Reduce motion for accessibility and performance */
   @media (prefers-reduced-motion: reduce) {
     .ring {
