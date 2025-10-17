@@ -129,14 +129,17 @@
   right: 0;
   bottom: 0;
   border-radius: 24px;
-  opacity: 0.4;
-  filter: blur(20px);
-  background: radial-gradient(
-    circle at 50% 50%,
-    var(--electric-border-color),
-    transparent 70%
-  );
+  opacity: 0.8;
+  mix-blend-mode: overlay;
+  filter: blur(16px);
   pointer-events: none;
+  background: linear-gradient(
+    -30deg,
+    white,
+    transparent 30%,
+    transparent 70%,
+    white
+  );
 }
 
 .electric-overlay-2 {
@@ -148,14 +151,17 @@
   right: 0;
   bottom: 0;
   border-radius: 24px;
-  opacity: 0.3;
-  filter: blur(30px);
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(221, 132, 72, 0.8),
-    transparent 60%
-  );
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  filter: blur(24px);
   pointer-events: none;
+  background: linear-gradient(
+    -30deg,
+    white,
+    transparent 30%,
+    transparent 70%,
+    white
+  );
 }
 
 /* Background glow effect */
