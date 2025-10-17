@@ -1,0 +1,220 @@
+/* Pricing Table - Feature Comparison Layout */
+
+.pricing-table-container {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 0 1rem;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Header Styling */
+.pricing-table thead th {
+  padding: 0;
+  vertical-align: top;
+}
+
+.feature-column {
+  width: 40%;
+  background: transparent;
+}
+
+.tier-column {
+  width: 30%;
+  text-align: center;
+}
+
+.tier-header {
+  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: none;
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+    letter-spacing: 1px;
+  }
+
+  .tier-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    padding-left: 1.5rem;
+    text-align: left;
+    list-style: disc;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.tier-premium-header {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(75, 0, 130, 0.2));
+  border-color: rgba(138, 43, 226, 0.4);
+  position: relative;
+}
+
+.tier-join-btn {
+  text-decoration: none;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+.tier-join-premium {
+  background: linear-gradient(135deg, #8a2be2, #4b0082);
+  border-color: #8a2be2;
+
+  &:hover {
+    background: linear-gradient(135deg, #9d3ef5, #5a0099);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+  }
+}
+
+/* Feature Rows */
+.pricing-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.feature-name {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  font-weight: 500;
+}
+
+.feature-value {
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.feature-check {
+  color: #4ade80;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Price Footer */
+.pricing-table tfoot {
+  td {
+    padding-top: 1.5rem;
+  }
+}
+
+.tier-price {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.price-period {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pricing-table-container {
+    padding: 0 0.5rem;
+  }
+
+  .tier-header {
+    padding: 1.5rem 1rem;
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .tier-join-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .feature-name,
+  .feature-value {
+    padding: 1rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .price-amount {
+    font-size: 1.5rem;
+  }
+
+  .special-offer-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-column {
+    width: 50%;
+  }
+
+  .tier-column {
+    width: 25%;
+  }
+
+  .tier-header h3 {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-name {
+    font-size: 0.8rem;
+  }
+
+  .price-amount {
+    font-size: 1.25rem;
+  }
+}
