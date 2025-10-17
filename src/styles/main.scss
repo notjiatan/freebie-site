@@ -16,6 +16,7 @@
   @include meta.load-css("carousel");
   @include meta.load-css("offerings");
   @include meta.load-css("section-title");
+  @include meta.load-css("how-it-works");
 }
 
 @layer utilities {
