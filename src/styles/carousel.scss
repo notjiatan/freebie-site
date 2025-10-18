@@ -129,6 +129,21 @@
   font-size: 1rem;
 }
 
+/* Card bullet lists */
+.carousel > article ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  font-size: 1rem;
+  list-style-type: disc;
+}
+
+.carousel > article li {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* Call-to-action buttons */
 .carousel > article a {
   text-decoration: none;
