@@ -1,5 +1,5 @@
 ---
-image: "@assets/logo.svg"
+logoPath: "/assets/logo.svg"
 title: Freebie Finders
 content: We Make The Stuff You Buy 100% Off!
 button:

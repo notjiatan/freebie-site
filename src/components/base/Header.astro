@@ -1,9 +1,16 @@
 ---
+/**
+ * Site Header Component
+ *
+ * Main navigation header with:
+ * - Home, Community Chat, and Login links
+ * - Active page highlighting
+ * - Responsive design
+ */
 
 const { pathname } = Astro.url;
 
-const stickyHeader = true;
-
+// Navigation menu items
 const menu = [
   {
     name: "Home",
@@ -23,316 +30,47 @@ const menu = [
 ];
 ---
 
+<!-- Main Header with Navigation -->
 <header
   transition:persist
-  class={`container max-w-2xl lg:max-w-3xl glass py-1 lg:py-0 z-30 mb-4 lg:mt-4 lg:rounded-lg ${stickyHeader && "sticky top-0"}`}
+  class={`container max-w-2xl lg:max-w-3xl glass py-1 lg:py-0 z-30 mb-4 lg:mt-4 lg:rounded-lg sticky top-0`}
 >
   <nav class="relative flex flex-wrap items-center justify-between">
-    <ul
-      id="nav-menu"
-      class="text-center order-1 flex w-full justify-between"
-    >
-      {
-        menu.map((item) => (
-          <li class="">
-            <a
-              href={item.url}
-              class={`flex flex-col items-center space-y-1 lg:flex-row lg:space-y-0 lg:space-x-1 p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 ${
-                (pathname === `${item.url}/` || pathname === item.url) &&
-                "active"
-              }`}
-            >
-              {item.icon === "home" && (
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-                </svg>
-              )}
-              {item.icon === "chat" && (
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
-                  <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
-                </svg>
-              )}
-              {item.icon === "login" && (
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                </svg>
-              )}
-              <span>{item.name}</span>
-            </a>
-          </li>
-        ))
-      }
+    <ul id="nav-menu" class="text-center order-1 flex w-full justify-between">
+      {menu.map((item) => (
+        <li>
+          <a
+            href={item.url}
+            class={`flex flex-col items-center space-y-1 lg:flex-row lg:space-y-0 lg:space-x-1 p-2 font-secondary font-semibold text-darkmode-txt-p transition lg:px-2 lg:py-3 ${
+              (pathname === `${item.url}/` || pathname === item.url) && "active"
+            }`}
+          >
+            <!-- Home Icon -->
+            {item.icon === "home" && (
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+              </svg>
+            )}
+
+            <!-- Chat Icon -->
+            {item.icon === "chat" && (
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+                <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+              </svg>
+            )}
+
+            <!-- Login Icon -->
+            {item.icon === "login" && (
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+              </svg>
+            )}
+
+            <span>{item.name}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   </nav>
 </header>
-
-<!-- Table of Contents - Below Header (only on homepage) -->
-<div id="toc-container" class="hidden">
-  <button id="toc-toggle" class="toc-button">
-    <span id="current-section" class="text-sm font-semibold">Freebie Finders</span>
-    <svg class="w-4 h-4 ml-2 transition-transform" id="toc-arrow" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-    </svg>
-  </button>
-
-  <!-- Dropdown Menu -->
-  <div id="toc-dropdown" class="toc-dropdown hidden">
-    <a href="#proof-testimonials" class="toc-item" data-section="Proof & Testimonials">Proof & Testimonials</a>
-    <a href="#featured-services" class="toc-item" data-section="Featured Services">Featured Services</a>
-    <a href="#how-it-works" class="toc-item" data-section="How It Works">How It Works</a>
-    <a href="#what-we-offer" class="toc-item" data-section="Services Provided To You">Services Provided To You</a>
-    <a href="#tiers" class="toc-item" data-section="Tiers">Tiers</a>
-    <a href="#our-stats" class="toc-item" data-section="Our Stats">Our Stats</a>
-  </div>
-</div>
-
-<style>
-  #toc-container {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 25;
-  }
-
-  .toc-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background: rgba(20, 20, 30, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 100;
-  }
-
-  .toc-button:hover {
-    background: rgba(30, 30, 40, 0.9);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-  }
-
-  .toc-button.active #toc-arrow {
-    transform: rotate(180deg);
-  }
-
-  .toc-dropdown {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 20, 30, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 0.5rem;
-    min-width: 280px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    pointer-events: auto;
-  }
-
-  .toc-dropdown.hidden {
-    display: none;
-  }
-
-  .toc-item {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-  }
-
-  .toc-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-
-  .toc-item.active {
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    font-weight: 600;
-  }
-
-  /* Show on all screen sizes */
-  @media (max-width: 768px) {
-    #toc-container {
-      top: 90px;
-      padding: 0 1rem;
-    }
-
-    .toc-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-    }
-
-    .toc-dropdown {
-      min-width: 240px;
-    }
-  }
-
-  /* Only show on homepage */
-  body:not([data-page="home"]) #toc-container {
-    display: none !important;
-  }
-</style>
-
-<script>
-  function initTableOfContents() {
-    const tocContainer = document.getElementById('toc-container');
-    const tocToggle = document.getElementById('toc-toggle');
-    const tocDropdown = document.getElementById('toc-dropdown');
-    const currentSection = document.getElementById('current-section');
-    const tocItems = document.querySelectorAll('.toc-item');
-
-    if (!tocContainer || !tocToggle || !tocDropdown || !currentSection) {
-      console.log('TOC elements not found');
-      return;
-    }
-
-    // Only show TOC on homepage
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-    if (isHomePage) {
-      tocContainer.style.display = 'block';
-      document.body.setAttribute('data-page', 'home');
-      console.log('TOC initialized on homepage');
-    } else {
-      return;
-    }
-
-    // Remove any existing listeners
-    const newToggle = tocToggle.cloneNode(true) as HTMLElement;
-    tocToggle.parentNode?.replaceChild(newToggle, tocToggle);
-    const freshToggle = document.getElementById('toc-toggle') as HTMLElement;
-
-    // Toggle dropdown with mousedown for better responsiveness
-    freshToggle.addEventListener('mousedown', (e: Event) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const dropdown = document.getElementById('toc-dropdown');
-      if (!dropdown) return;
-
-      const isHidden = dropdown.classList.contains('hidden');
-      console.log('Toggle clicked, dropdown is:', isHidden ? 'hidden' : 'visible');
-
-      if (isHidden) {
-        dropdown.classList.remove('hidden');
-        freshToggle.classList.add('active');
-      } else {
-        dropdown.classList.add('hidden');
-        freshToggle.classList.remove('active');
-      }
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('mousedown', (e) => {
-      const container = document.getElementById('toc-container');
-      if (container && !container.contains(e.target as Node)) {
-        const dropdown = document.getElementById('toc-dropdown');
-        const toggle = document.getElementById('toc-toggle');
-        if (dropdown && toggle) {
-          dropdown.classList.add('hidden');
-          toggle.classList.remove('active');
-        }
-      }
-    });
-
-    // Handle TOC link clicks with smooth scrolling
-    const refreshedItems = document.querySelectorAll('.toc-item');
-    refreshedItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        // Get target section
-        const href = (item as HTMLAnchorElement).getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const targetId = href.substring(1);
-          const targetSection = document.getElementById(targetId);
-
-          if (targetSection) {
-            // Smooth scroll to section
-            targetSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-
-        // Close dropdown
-        const dropdown = document.getElementById('toc-dropdown');
-        const toggle = document.getElementById('toc-toggle');
-        if (dropdown && toggle) {
-          dropdown.classList.add('hidden');
-          toggle.classList.remove('active');
-        }
-      });
-    });
-
-    // Track active section on scroll
-    const sections = [
-      { id: 'proof-testimonials', name: 'Proof & Testimonials' },
-      { id: 'featured-services', name: 'Featured Services' },
-      { id: 'how-it-works', name: 'How It Works' },
-      { id: 'what-we-offer', name: 'Services Provided To You' },
-      { id: 'tiers', name: 'Tiers' },
-      { id: 'our-stats', name: 'Our Stats' },
-    ];
-
-    function updateActiveSection() {
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id) as HTMLElement;
-        if (section && section.offsetTop <= scrollPos) {
-          const currentSectionEl = document.getElementById('current-section');
-          if (currentSectionEl) {
-            currentSectionEl.textContent = sections[i].name;
-          }
-
-          // Update active state in dropdown
-          tocItems.forEach(item => {
-            if (item.getAttribute('data-section') === sections[i].name) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-
-          break;
-        }
-      }
-    }
-
-    // Update on scroll with throttle
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // Initial update
-    updateActiveSection();
-  }
-
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initTableOfContents);
-
-  // Re-initialize on Astro page transitions
-  document.addEventListener('astro:page-load', initTableOfContents);
-</script>

@@ -1,24 +1,25 @@
 ---
+/**
+ * Community Chat Page
+ *
+ * Embeds the Revolt chat platform for community communication
+ */
 import BaseLayout from "@components/base/BaseLayout.astro";
 ---
 
 <BaseLayout title="Community Chat">
   <div class="w-full h-screen relative flex items-center justify-center">
+    <!-- Loading message (shown while iframe loads) -->
     <div class="absolute inset-0 flex items-center justify-center z-0">
       <p class="text-white text-2xl opacity-70">Loading community chat...</p>
     </div>
+
+    <!-- Revolt Chat Iframe -->
     <iframe
       src="https://revolt.chat/"
       class="w-full h-full border-0 relative z-10"
       title="Revolt Chat"
-      allow="microphone; camera; fullscreen">
-    </iframe>
+      allow="microphone; camera; fullscreen"
+    ></iframe>
   </div>
 </BaseLayout>
-
-<style>
-  /* Ensure flying lines appear behind iframe */
-  .ring {
-    z-index: 5 !important;
-  }
-</style>

@@ -1,9 +1,27 @@
 ---
+/**
+ * Dashboard Page
+ *
+ * Main dashboard for logged-in users
+ * Shows: How to get started, subscription info, and user settings
+ */
 import BaseLayout from "@components/base/BaseLayout.astro";
 import Button from "@components/common/Button.astro";
+import NavigationTOC from "@components/common/NavigationTOC.astro";
+import PricingTable from "@components/common/PricingTable.astro";
+
+// Define dashboard sections for table of contents
+const dashboardSections = [
+  { id: 'how-to-use', name: 'How to use Freebie Finders' },
+  { id: 'your-subscription', name: 'Your subscription' },
+  { id: 'user-settings', name: 'User Settings' },
+];
 ---
 
 <BaseLayout title="Dashboard - Freebie Finders">
+  <!-- Navigation Table of Contents -->
+  <NavigationTOC sections={dashboardSections} containerId="dashboard-toc" />
+
   <!-- Dashboard Header -->
   <section class="section pt-20">
     <div class="container">
@@ -17,22 +35,6 @@ import Button from "@components/common/Button.astro";
     </div>
   </section>
 
-  <!-- Table of Contents -->
-  <div id="dashboard-toc-container">
-    <button id="dashboard-toc-toggle" class="toc-button">
-      <span id="dashboard-current-section" class="text-sm font-semibold">Dashboard</span>
-      <svg class="w-4 h-4 ml-2 transition-transform" id="dashboard-toc-arrow" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-      </svg>
-    </button>
-
-    <div id="dashboard-toc-dropdown" class="toc-dropdown hidden">
-      <a href="#how-to-use" class="toc-item" data-section="How to use Freebie Finders">How to use Freebie Finders</a>
-      <a href="#your-subscription" class="toc-item" data-section="Your subscription">Your subscription</a>
-      <a href="#user-settings" class="toc-item" data-section="User Settings">User Settings</a>
-    </div>
-  </div>
-
   <!-- How to use Freebie Finders Section -->
   <section class="section" id="how-to-use">
     <div class="container">
@@ -41,15 +43,19 @@ import Button from "@components/common/Button.astro";
           <div class="text-center mb-8">
             <h2 class="section-title">How to use Freebie Finders</h2>
           </div>
+
+          <!-- Two-column layout: Instructions and Video -->
           <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <!-- Instructions Column -->
               <div class="glass rounded-lg p-6">
-                <div class="space-y-6 text-txt-p dark:text-darkmode-txt-p">
+                <div class="space-y-6 text-darkmode-txt-p">
+                  <!-- Welcome Message -->
                   <div>
                     <p class="font-semibold text-lg mb-2">Welcome! Thank you for signing up.</p>
                   </div>
 
+                  <!-- What we offer -->
                   <div>
                     <p class="font-semibold mb-2">What we offer:</p>
                     <p class="mb-3">Free food, goods, subscription accounts, services, and more.</p>
@@ -63,6 +69,7 @@ import Button from "@components/common/Button.astro";
                     />
                   </div>
 
+                  <!-- Getting started steps -->
                   <div>
                     <p class="font-semibold mb-2">Getting started:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4 mb-3">
@@ -82,7 +89,7 @@ import Button from "@components/common/Button.astro";
                 </div>
               </div>
 
-              <!-- Video Column -->
+              <!-- Video Placeholder Column -->
               <div class="glass rounded-lg p-6 flex items-center justify-center">
                 <div class="w-full aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg flex items-center justify-center">
                   <p class="text-white text-lg opacity-70">Video Coming Soon</p>
@@ -95,7 +102,7 @@ import Button from "@components/common/Button.astro";
     </div>
   </section>
 
-  <!-- Your subscription Section -->
+  <!-- Your Subscription Section -->
   <section class="section" id="your-subscription">
     <div class="container">
       <div class="row justify-center">
@@ -103,8 +110,10 @@ import Button from "@components/common/Button.astro";
           <div class="text-center mb-8">
             <h2 class="section-title">Your subscription</h2>
           </div>
+
+          <!-- Current Subscription Status -->
           <div class="glass rounded-lg p-6 max-w-3xl mx-auto mb-8">
-            <div class="space-y-4 text-txt-p dark:text-darkmode-txt-p">
+            <div class="space-y-4 text-darkmode-txt-p">
               <div class="flex justify-between items-center">
                 <span class="font-semibold">Current Plan:</span>
                 <span class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white">Free Tier</span>
@@ -127,69 +136,13 @@ import Button from "@components/common/Button.astro";
           </div>
         </div>
       </div>
+
+      <!-- Available Plans Comparison -->
       <div class="row justify-center">
         <div class="text-center mb-4">
-          <h3 class="text-2xl font-bold text-txt-p dark:text-darkmode-txt-p">Available Plans</h3>
+          <h3 class="text-2xl font-bold text-darkmode-txt-p">Available Plans</h3>
         </div>
-        <div class="pricing-table-container">
-          <table class="pricing-table">
-            <!-- Header Row -->
-            <thead>
-              <tr>
-                <th class="feature-column"></th>
-                <th class="tier-column tier-free">
-                  <div class="tier-header">
-                    <h3>FREE TIER</h3>
-                    <ul class="tier-description">
-                      <li>You get 1 trial generation every so often (from the non-free section of our services); PER IP ADDRESS [NO VPNs, we check]</li>
-                      <li>You have to time it, since they are taken very fast by other users</li>
-                    </ul>
-                    <a href="/login" class="tier-join-btn">JOIN</a>
-                  </div>
-                </th>
-                <th class="tier-column tier-premium">
-                  <div class="tier-header tier-premium-header">
-                    <h3>FINDER PLUS</h3>
-                    <a href="/login" class="tier-join-btn tier-join-premium">JOIN</a>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <!-- Feature Rows -->
-            <tbody>
-              <tr>
-                <td class="feature-name">Unlimited Freebie Generation</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Access to free section</td>
-                <td class="feature-value feature-check">✓</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Access to [35] services & freebies</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Refills</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Staff Support</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Community chat access</td>
-                <td class="feature-value feature-check">✓</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PricingTable />
       </div>
     </div>
   </section>
@@ -202,23 +155,25 @@ import Button from "@components/common/Button.astro";
           <div class="text-center mb-8">
             <h2 class="section-title">User Settings</h2>
           </div>
+
           <div class="row justify-center">
             <div class="col-12 lg:col-4">
               <div class="space-y-6">
                 <!-- Profile Card -->
                 <div class="glass rounded-lg p-6">
                   <div class="text-center">
+                    <!-- Profile Avatar -->
                     <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                       <span class="text-2xl font-bold text-white">T</span>
                     </div>
-                    <h3 class="font-semibold text-txt-p dark:text-darkmode-txt-p mb-4">Test User</h3>
-                    <a href="/settings" class="glass-t rounded-md px-4 py-2 hover:bg-opacity-40 transition-all duration-300 text-txt-p dark:text-darkmode-txt-p inline-block text-center">
+                    <h3 class="font-semibold text-darkmode-txt-p mb-4">Test User</h3>
+                    <a href="/settings" class="glass-t rounded-md px-4 py-2 hover:bg-opacity-40 transition-all duration-300 text-darkmode-txt-p inline-block text-center">
                       Settings
                     </a>
                   </div>
                 </div>
 
-                <!-- Logout -->
+                <!-- Sign Out Button -->
                 <div class="glass rounded-lg p-6">
                   <Button
                     label="Sign Out"
@@ -239,238 +194,9 @@ import Button from "@components/common/Button.astro";
 </BaseLayout>
 
 <style>
-  /* Dashboard specific animations */
+  /* Dashboard-specific hover effects */
   .glass:hover {
     transform: translateY(-2px);
     transition: all 0.3s ease;
   }
-
-  /* Gradient text for stats */
-  .text-purple-400 {
-    background: linear-gradient(135deg, #a855f7, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Table of Contents styles */
-  #dashboard-toc-container {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 25;
-  }
-
-  .toc-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background: rgba(20, 20, 30, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 100;
-  }
-
-  .toc-button:hover {
-    background: rgba(30, 30, 40, 0.9);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-  }
-
-  .toc-button.active #dashboard-toc-arrow {
-    transform: rotate(180deg);
-  }
-
-  .toc-dropdown {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 20, 30, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 0.5rem;
-    min-width: 280px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    pointer-events: auto;
-  }
-
-  .toc-dropdown.hidden {
-    display: none;
-  }
-
-  .toc-item {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-  }
-
-  .toc-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-
-  .toc-item.active {
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    font-weight: 600;
-  }
-
-  @media (max-width: 768px) {
-    #dashboard-toc-container {
-      top: 90px;
-      padding: 0 1rem;
-    }
-
-    .toc-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-    }
-
-    .toc-dropdown {
-      min-width: 240px;
-    }
-  }
 </style>
-
-<script>
-  function initDashboardTOC() {
-    const tocContainer = document.getElementById('dashboard-toc-container');
-    const tocToggle = document.getElementById('dashboard-toc-toggle');
-    const tocDropdown = document.getElementById('dashboard-toc-dropdown');
-    const currentSection = document.getElementById('dashboard-current-section');
-    const tocItems = document.querySelectorAll('.toc-item');
-
-    if (!tocContainer || !tocToggle || !tocDropdown || !currentSection) {
-      console.log('Dashboard TOC elements not found');
-      return;
-    }
-
-    console.log('Dashboard TOC initialized');
-
-    // Remove any existing listeners by cloning
-    const newToggle = tocToggle.cloneNode(true);
-    tocToggle.parentNode?.replaceChild(newToggle, tocToggle);
-    const freshToggle = document.getElementById('dashboard-toc-toggle');
-
-    if (!freshToggle) return;
-
-    freshToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const dropdown = document.getElementById('dashboard-toc-dropdown');
-      if (!dropdown) return;
-
-      const isHidden = dropdown.classList.contains('hidden');
-      console.log('Toggle clicked, dropdown is:', isHidden ? 'hidden' : 'visible');
-
-      if (isHidden) {
-        dropdown.classList.remove('hidden');
-        freshToggle.classList.add('active');
-      } else {
-        dropdown.classList.add('hidden');
-        freshToggle.classList.remove('active');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      const container = document.getElementById('dashboard-toc-container');
-      if (container && !container.contains(e.target)) {
-        const dropdown = document.getElementById('dashboard-toc-dropdown');
-        const toggle = document.getElementById('dashboard-toc-toggle');
-        if (dropdown && toggle) {
-          dropdown.classList.add('hidden');
-          toggle.classList.remove('active');
-        }
-      }
-    });
-
-    const refreshedItems = document.querySelectorAll('.toc-item');
-    refreshedItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const href = item.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const targetId = href.substring(1);
-          const targetSection = document.getElementById(targetId);
-
-          if (targetSection) {
-            targetSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-
-        const dropdown = document.getElementById('dashboard-toc-dropdown');
-        const toggle = document.getElementById('dashboard-toc-toggle');
-        if (dropdown && toggle) {
-          dropdown.classList.add('hidden');
-          toggle.classList.remove('active');
-        }
-      });
-    });
-
-    const sections = [
-      { id: 'how-to-use', name: 'How to use Freebie Finders' },
-      { id: 'your-subscription', name: 'Your subscription' },
-      { id: 'user-settings', name: 'User Settings' },
-    ];
-
-    function updateActiveSection() {
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && section.offsetTop <= scrollPos) {
-          const currentSectionEl = document.getElementById('dashboard-current-section');
-          if (currentSectionEl) {
-            currentSectionEl.textContent = sections[i].name;
-          }
-
-          refreshedItems.forEach(item => {
-            if (item.getAttribute('data-section') === sections[i].name) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-
-          break;
-        }
-      }
-    }
-
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    updateActiveSection();
-  }
-
-  document.addEventListener('DOMContentLoaded', initDashboardTOC);
-  document.addEventListener('astro:page-load', initDashboardTOC);
-</script>

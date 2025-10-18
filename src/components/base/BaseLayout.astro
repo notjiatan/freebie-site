@@ -5,7 +5,6 @@ import ObserverScript from "@components/base/ObserverScript.astro";
 import "@/styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import Background from "@/components/base/Background.astro";
-import ThemeScript from "@components/base/ThemeScript.astro";
 import { Tooltips } from "astro-tooltips";
 
 // types for frontmatters
@@ -21,7 +20,7 @@ const { title, description, image, noindex, canonical } = Astro.props;
 
 const siteTitle = "Freebie Finders";
 const siteDescription = "";
-const siteImage = "@assets/og-image.png";
+const siteImage = "/assets/og-image.png";
 const siteAuthor = "";
 const baseUrl = "https://janedoe.com";
 ---
@@ -51,16 +50,7 @@ const baseUrl = "https://janedoe.com";
 
     <meta name="theme-name" content="pages" />
     <meta name="msapplication-TileColor" content="#000000" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#fff"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#000"
-    />
+    <meta name="theme-color" content="#000" />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -113,7 +103,6 @@ const baseUrl = "https://janedoe.com";
     <Tooltips interactive={false} delay={[333, 0]} />
   </head>
   <body>
-    <ThemeScript />
     <Background />
     <Header />
     <main id="main-content" class="flex-1">

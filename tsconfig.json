@@ -6,7 +6,6 @@
       "@/*": ["./src/*"],
       "@lib/*": ["./src/lib/*"],
       "@components/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"],
       "@shortcodes/*": ["./src/components/common/shortcodes/*"]
     }
   }

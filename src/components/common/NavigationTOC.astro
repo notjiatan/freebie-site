@@ -1,0 +1,248 @@
+---
+/**
+ * NavigationTOC Component
+ *
+ * A sticky table of contents navigation for page sections
+ * Displays current section and allows quick navigation between sections
+ *
+ * @param sections - Array of section objects with id and name
+ * @param containerId - Unique ID for this TOC instance (e.g., "homepage-toc", "dashboard-toc")
+ */
+
+interface Section {
+  id: string;
+  name: string;
+}
+
+interface Props {
+  sections: Section[];
+  containerId: string;
+}
+
+const { sections, containerId } = Astro.props;
+---
+
+<!-- Table of Contents Navigation -->
+<div id={`${containerId}-container`} class="toc-container">
+  <button id={`${containerId}-toggle`} class="toc-button">
+    <span id={`${containerId}-current-section`} class="text-sm font-semibold">
+      {sections[0]?.name || 'Navigation'}
+    </span>
+    <svg class="w-4 h-4 ml-2 transition-transform" id={`${containerId}-arrow`} fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+    </svg>
+  </button>
+
+  <div id={`${containerId}-dropdown`} class="toc-dropdown hidden">
+    {sections.map((section) => (
+      <a href={`#${section.id}`} class="toc-item" data-section={section.name}>
+        {section.name}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Sticky positioned TOC */
+  .toc-container {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+  }
+
+  /* Toggle button styling */
+  .toc-button {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: rgba(20, 20, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 100;
+  }
+
+  .toc-button:hover {
+    background: rgba(30, 30, 40, 0.9);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .toc-button.active svg {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown menu styling */
+  .toc-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 280px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    pointer-events: auto;
+  }
+
+  .toc-dropdown.hidden {
+    display: none;
+  }
+
+  /* Individual TOC items */
+  .toc-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .toc-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .toc-item.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .toc-container {
+      top: 90px;
+      padding: 0 1rem;
+    }
+
+    .toc-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .toc-dropdown {
+      min-width: 240px;
+    }
+  }
+</style>
+
+<script define:vars={{ containerId, sections }}>
+  /**
+   * Initialize Table of Contents navigation
+   * Handles toggle, scroll tracking, and smooth navigation
+   */
+  function initTOC() {
+    const container = document.getElementById(`${containerId}-container`);
+    const toggle = document.getElementById(`${containerId}-toggle`);
+    const dropdown = document.getElementById(`${containerId}-dropdown`);
+    const currentSectionEl = document.getElementById(`${containerId}-current-section`);
+    const items = document.querySelectorAll(`#${containerId}-dropdown .toc-item`);
+
+    if (!container || !toggle || !dropdown || !currentSectionEl) {
+      console.log(`TOC elements not found for ${containerId}`);
+      return;
+    }
+
+    // Toggle dropdown on button click
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+        toggle.classList.add('active');
+      } else {
+        dropdown.classList.add('hidden');
+        toggle.classList.remove('active');
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) {
+        dropdown.classList.add('hidden');
+        toggle.classList.remove('active');
+      }
+    });
+
+    // Handle section link clicks
+    items.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetId = href.substring(1);
+          const targetSection = document.getElementById(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+
+        dropdown.classList.add('hidden');
+        toggle.classList.remove('active');
+      });
+    });
+
+    // Update active section based on scroll position
+    function updateActiveSection() {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
+        if (section && section.offsetTop <= scrollPos) {
+          currentSectionEl.textContent = sections[i].name;
+
+          items.forEach(item => {
+            if (item.getAttribute('data-section') === sections[i].name) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+
+          break;
+        }
+      }
+    }
+
+    // Throttled scroll listener
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial update
+    updateActiveSection();
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initTOC);
+  document.addEventListener('astro:page-load', initTOC);
+</script>

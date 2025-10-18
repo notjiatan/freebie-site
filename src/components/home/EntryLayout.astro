@@ -1,10 +1,22 @@
 ---
+/**
+ * Homepage Entry Layout
+ *
+ * Main landing page layout with all homepage sections:
+ * - Hero/Banner with proof & testimonials
+ * - Featured services carousel
+ * - How it works
+ * - What we offer
+ * - Pricing tiers
+ * - Stats
+ */
 import BaseLayout from "@components/base/BaseLayout.astro";
 import { markdownify } from "@lib/textConverter";
 import Button from "@components/common/Button.astro";
 import Footer from "@components/base/Footer.astro";
+import PricingTable from "@components/common/PricingTable.astro";
+import HomepageTOC from "@components/common/HomepageTOC.astro";
 import type { HomeEntry } from "@/types";
-import { Image } from "astro:assets";
 import { getIndex } from "@lib/contentParser";
 
 interface Props {
@@ -12,63 +24,68 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { image, imageAlt, title, content, button } = entry.data;
+const { logoPath, title, content, button } = entry.data;
+
+// Load "What We Offer" content from markdown
 const whatWeOfferEntry = await getIndex("what-we-offer");
 const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntry.data;
 ---
 
 <BaseLayout>
-  <!-- Banner -->
+  <!-- Homepage Table of Contents -->
+  <HomepageTOC />
+
+  <!-- Hero Banner with Proof & Testimonials -->
   <section class="section" id="proof-testimonials">
     <div class="container">
       <div class="row justify-center">
         <div class="text-center lg:col-6">
-          {
-            image && (
-              <div class="blur-[0px]">
-                <Image
-                class="mb-6 w-64 svg-glow"
-                src={image}
-                alt={imageAlt}
-                width={1024}
-                height={1024}
+          <!-- Logo/Image -->
+          {logoPath && (
+            <div class="blur-[0px]">
+              <img
+                class="mb-6 w-64 svg-glow mx-auto"
+                src={logoPath}
+                alt={title}
+                width={256}
+                height={256}
                 loading="eager"
               />
-              </div>
+            </div>
+          )}
 
-            )
-          }
+          <!-- Hero Title and Subtitle -->
           <h1 set:html={markdownify(title)} class="mb-4 flicker-text neon-title" />
           <p set:html={markdownify(content)} class="mb-8 neon-subtitle" />
-          {
-            button && (
-              <>
-                <div class="mb-4">
-                  <h2 class="section-title">Proof & Testimonials</h2>
-                </div>
-                <Button
-                  label={button.label}
-                  link={button.link}
-                  newtab
-                  hoverInvert
-                  color=""
-                />
-                <div class="mt-8 iframe-container">
-                  <div class="iframe-loading">Loading...</div>
-                  <iframe
-                    style="width: 100%; max-width: 800px; height: 400px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px;"
-                    title="Stoat Chat"
-                  ></iframe>
-                </div>
-              </>
-            )
-          }
+
+          <!-- Proof & Testimonials Button and Iframe -->
+          {button && (
+            <>
+              <div class="mb-4">
+                <h2 class="section-title">Proof & Testimonials</h2>
+              </div>
+              <Button
+                label={button.label}
+                link={button.link}
+                newtab
+                hoverInvert
+                color=""
+              />
+              <div class="mt-8 iframe-container">
+                <div class="iframe-loading">Loading...</div>
+                <iframe
+                  style="width: 100%; max-width: 800px; height: 400px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px;"
+                  title="Stoat Chat"
+                ></iframe>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Carousel Section - Freebie Categories -->
+  <!-- Featured Services Carousel -->
   <section class="section" id="featured-services">
     <div class="container">
       <div class="row justify-center">
@@ -83,10 +100,11 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
             color=""
           />
         </div>
+
+        <!-- Horizontal Scrolling Carousel -->
         <div class="col-12">
-          <!-- Horizontal Scrolling Carousel -->
           <div class="carousel" mask>
-            <!-- Greggs -->
+            <!-- Service: Greggs -->
             <article>
               <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1260&h=750&fit=crop" alt="Greggs bakery and food">
               <h2>Greggs</h2>
@@ -95,7 +113,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               </div>
             </article>
 
-            <!-- Apple Music -->
+            <!-- Service: Apple Music -->
             <article>
               <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1260&h=750&fit=crop" alt="Apple Music streaming">
               <h2>Apple Music</h2>
@@ -104,7 +122,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               </div>
             </article>
 
-            <!-- Amazon Prime -->
+            <!-- Service: Amazon Prime -->
             <article>
               <img src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=1260&h=750&fit=crop" alt="Amazon Prime delivery and streaming">
               <h2>Amazon Prime</h2>
@@ -113,7 +131,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               </div>
             </article>
 
-            <!-- Uber Eats -->
+            <!-- Service: Uber Eats -->
             <article>
               <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1260&h=750&fit=crop" alt="Uber Eats food delivery">
               <h2>Uber Eats</h2>
@@ -122,7 +140,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               </div>
             </article>
 
-            <!-- Nandos -->
+            <!-- Service: Nandos -->
             <article>
               <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=1260&h=750&fit=crop" alt="Nandos restaurant food">
               <h2>Nandos</h2>
@@ -131,7 +149,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               </div>
             </article>
 
-            <!-- McDonalds -->
+            <!-- Service: McDonalds -->
             <article>
               <img src="https://images.unsplash.com/photo-1619454016518-697bc231e7cb?w=1260&h=750&fit=crop" alt="McDonald's fast food">
               <h2>McDonald's</h2>
@@ -153,19 +171,20 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
           <h2 class="section-title">How It Works</h2>
         </div>
       </div>
+
       <div class="row justify-center">
         <div class="col-12">
           <div class="how-it-works-wrapper">
-            <!-- Vertical scroll indicator -->
+            <!-- Vertical scroll indicator with animated line and circle -->
             <div class="scroll-indicator">
               <div class="scroll-line"></div>
               <div class="scroll-fill"></div>
               <div class="scroll-circle"></div>
             </div>
 
-            <!-- Steps -->
+            <!-- Step-by-step process -->
             <div class="steps-container">
-              <!-- Step 1 -->
+              <!-- Step 1: Sign Up -->
               <div class="step-item">
                 <div class="step-content">
                   <div class="step-image">
@@ -178,7 +197,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                 </div>
               </div>
 
-              <!-- Step 2 -->
+              <!-- Step 2: Browse -->
               <div class="step-item">
                 <div class="step-content">
                   <div class="step-image">
@@ -191,14 +210,14 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                 </div>
               </div>
 
-              <!-- Step 3 -->
+              <!-- Step 3: Generate -->
               <div class="step-item">
                 <div class="step-content">
                   <div class="step-image">
                     <img src="/assets/how-it-works/generate.png" alt="Claim rewards" loading="lazy" />
                   </div>
                   <div class="step-text">
-                    <h3 class="step-title">Step 3 — Genterate The Freebies You Want</h3>
+                    <h3 class="step-title">Step 3 — Generate The Freebies You Want</h3>
                     <p class="step-description">Follow the simple instructions in the chat app to generate your freebies.</p>
                   </div>
                 </div>
@@ -219,6 +238,8 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
           {offerDesc && <p class="text-lg neon-subtitle opacity-80 mt-4">{offerDesc}</p>}
         </div>
       </div>
+
+      <!-- Grid of offering cards -->
       <div class="row justify-center">
         <div class="col-12">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -227,6 +248,8 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                 <div class="offering-card-content">
                   <h3 class="offering-card-title">{offering.title}</h3>
                   <p class="offering-card-description" set:html={offering.description} />
+
+                  <!-- Brand Icons -->
                   {offering.brandIcons && offering.brandIcons.length > 0 && (
                     <div class="offering-brand-icons">
                       {offering.brandIcons.map((iconUrl) => {
@@ -244,6 +267,8 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                     </div>
                   )}
                 </div>
+
+                <!-- Category Icon -->
                 {offering.icon && (
                   <div class="offering-card-icon">
                     <img src={offering.icon} alt={offering.title} />
@@ -257,72 +282,14 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
     </div>
   </section>
 
-  <!-- Pricing Cards Section -->
+  <!-- Pricing Tiers Section -->
   <section class="section" id="tiers">
     <div class="container">
       <div class="row justify-center">
         <div class="text-center mb-4">
           <h2 class="section-title">Tiers</h2>
         </div>
-        <div class="pricing-table-container">
-          <table class="pricing-table">
-            <!-- Header Row -->
-            <thead>
-              <tr>
-                <th class="feature-column"></th>
-                <th class="tier-column tier-free">
-                  <div class="tier-header">
-                    <h3>FREE TIER</h3>
-                    <ul class="tier-description">
-                      <li>You get 1 trial generation every so often (from the non-free section of our services); PER IP ADDRESS [NO VPNs, we check]</li>
-                      <li>You have to time it, since they are taken very fast by other users</li>
-                    </ul>
-                    <a href="/login" class="tier-join-btn">JOIN</a>
-                  </div>
-                </th>
-                <th class="tier-column tier-premium">
-                  <div class="tier-header tier-premium-header">
-                    <h3>FINDER PLUS</h3>
-                    <a href="/login" class="tier-join-btn tier-join-premium">JOIN</a>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <!-- Feature Rows -->
-            <tbody>
-              <tr>
-                <td class="feature-name">Unlimited Freebie Generation</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Access to free section</td>
-                <td class="feature-value feature-check">✓</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Access to [35] services & freebies</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Refills</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Staff Support</td>
-                <td class="feature-value">❌</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-              <tr>
-                <td class="feature-name">Community chat access</td>
-                <td class="feature-value feature-check">✓</td>
-                <td class="feature-value feature-check">✓</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PricingTable />
       </div>
     </div>
   </section>
@@ -335,10 +302,11 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
           <h2 class="section-title">Our Stats</h2>
         </div>
       </div>
+
       <div class="row justify-center">
         <div class="col-12">
           <div class="stats-container">
-            <!-- Discord-style Member Count Widget -->
+            <!-- Community Member Count Widget -->
             <div class="stat-widget discord-widget">
               <div class="widget-header">
                 <span class="widget-title">Freebie Finders Community Chat</span>
@@ -400,7 +368,10 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 <Footer />
 
 <script>
-  // Animated scroll indicator for "How It Works" section
+  /**
+   * Animated scroll indicator for "How It Works" section
+   * Creates a smooth, animated vertical line that follows scroll progress
+   */
   function initScrollIndicator() {
     const wrapper = document.querySelector('.how-it-works-wrapper') as HTMLElement;
     if (!wrapper) return;
@@ -411,20 +382,22 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
     if (!indicator || !circle || !fill) return;
 
-    // Smooth animation variables
+    // Animation state
     let currentPos = 0;
     let targetPos = 0;
-    const ease = 0.15;
+    const ease = 0.15; // Easing factor for smooth animation
 
+    // Clamp value between min and max
     function clamp(val: number, min: number, max: number): number {
       return Math.max(min, Math.min(max, val));
     }
 
+    // Update indicator position based on scroll
     function updateIndicator() {
       const rect = wrapper.getBoundingClientRect();
       const viewportMid = window.innerHeight / 2;
 
-      // Calculate target position based on scroll
+      // Calculate target position
       targetPos = clamp(viewportMid - rect.top, 0, rect.height);
 
       // Smooth interpolation
@@ -437,13 +410,11 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
       requestAnimationFrame(updateIndicator);
     }
 
-    // Start animation
+    // Start animation loop
     updateIndicator();
   }
 
-  // Initialize on page load
+  // Initialize on page load and Astro page transitions
   document.addEventListener('DOMContentLoaded', initScrollIndicator);
-
-  // Re-initialize on Astro page transitions
   document.addEventListener('astro:page-load', initScrollIndicator);
 </script>

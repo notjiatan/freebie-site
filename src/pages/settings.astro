@@ -1,4 +1,9 @@
 ---
+/**
+ * Settings Page
+ *
+ * User account settings and preferences
+ */
 import BaseLayout from "@components/base/BaseLayout.astro";
 import Button from "@components/common/Button.astro";
 ---
@@ -23,15 +28,14 @@ import Button from "@components/common/Button.astro";
     <div class="container">
       <div class="row justify-center">
         <div class="col-12 lg:col-8">
-          
           <!-- Profile Settings -->
           <div class="glass rounded-lg p-8 mb-8">
-            <h2 class="text-h4 font-bold text-txt-p dark:text-darkmode-txt-p mb-6">Profile Settings</h2>
+            <h2 class="text-h4 font-bold text-darkmode-txt-p mb-6">Profile Settings</h2>
             <div class="space-y-6">
               <div class="flex items-center justify-between">
                 <div>
-                  <h3 class="font-semibold text-txt-p dark:text-darkmode-txt-p">Email Address</h3>
-                  <p class="text-sm text-txt-light dark:text-darkmode-txt-light">test@test.com</p>
+                  <h3 class="font-semibold text-darkmode-txt-p">Email Address</h3>
+                  <p class="text-sm text-darkmode-txt-light">test@test.com</p>
                 </div>
                 <Button
                   label="Change Email Address"
@@ -43,7 +47,6 @@ import Button from "@components/common/Button.astro";
             </div>
           </div>
 
-
           <!-- Navigation -->
           <div class="text-center">
             <Button
@@ -53,34 +56,13 @@ import Button from "@components/common/Button.astro";
               glass={true}
             />
           </div>
-
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<script>
-  // Form submission handlers
-  const profileForm = document.querySelector('form');
-  profileForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Profile updated successfully! (This is a demo)');
-  });
-
-</script>
-
 <style>
-  /* Custom focus states for inputs */
-  input:focus {
-    box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.5);
-  }
-  
-  /* Toggle switch styling */
-  .peer:checked ~ div {
-    background-color: #9333ea;
-  }
-  
   /* Hover effects for glass panels */
   .glass:hover {
     transform: translateY(-2px);

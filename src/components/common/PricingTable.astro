@@ -1,0 +1,73 @@
+---
+/**
+ * PricingTable Component
+ *
+ * Displays a responsive pricing comparison table for Free Tier vs Finder Plus
+ * Used on homepage and dashboard pages
+ */
+---
+
+<div class="pricing-table-container">
+  <table class="pricing-table">
+    <!-- Header Row with Tier Information -->
+    <thead>
+      <tr>
+        <th class="feature-column"></th>
+
+        <!-- Free Tier Column -->
+        <th class="tier-column tier-free">
+          <div class="tier-header">
+            <h3>FREE TIER</h3>
+            <ul class="tier-description">
+              <li>You get 1 trial generation every so often (from the non-free section of our services); PER IP ADDRESS [NO VPNs, we check]</li>
+              <li>You have to time it, since they are taken very fast by other users</li>
+            </ul>
+            <a href="/login" class="tier-join-btn">JOIN</a>
+          </div>
+        </th>
+
+        <!-- Finder Plus Premium Column -->
+        <th class="tier-column tier-premium">
+          <div class="tier-header tier-premium-header">
+            <h3>FINDER PLUS</h3>
+            <a href="/login" class="tier-join-btn tier-join-premium">JOIN</a>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <!-- Feature Comparison Rows -->
+    <tbody>
+      <tr>
+        <td class="feature-name">Unlimited Freebie Generation</td>
+        <td class="feature-value">❌</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Access to free section</td>
+        <td class="feature-value feature-check">✓</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Access to [35] services & freebies</td>
+        <td class="feature-value">❌</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Refills</td>
+        <td class="feature-value">❌</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Staff Support</td>
+        <td class="feature-value">❌</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Community chat access</td>
+        <td class="feature-value feature-check">✓</td>
+        <td class="feature-value feature-check">✓</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
