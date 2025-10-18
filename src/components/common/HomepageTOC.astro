@@ -42,7 +42,7 @@ const sections = [
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 25;
+    z-index: 1000;
   }
 
   /* Toggle button */
@@ -86,8 +86,9 @@ const sections = [
     padding: 0.5rem;
     min-width: 280px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
+    z-index: 1001;
     pointer-events: auto;
+    display: block;
   }
 
   .toc-dropdown.hidden {
@@ -147,6 +148,7 @@ const sections = [
     const tocItems = document.querySelectorAll('#homepage-toc-dropdown .toc-item');
 
     if (!tocContainer || !tocToggle || !tocDropdown || !currentSection) {
+      console.log('TOC elements not found');
       return;
     }
 
@@ -156,26 +158,37 @@ const sections = [
 
     tocContainer.classList.remove('hidden');
 
+    // Remove any existing click listeners by cloning and replacing
+    const newToggle = tocToggle.cloneNode(true);
+    tocToggle.parentNode.replaceChild(newToggle, tocToggle);
+
     // Toggle dropdown
-    tocToggle.addEventListener('click', (e) => {
+    newToggle.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
 
-      const isHidden = tocDropdown.classList.contains('hidden');
+      const dropdown = document.getElementById('homepage-toc-dropdown');
+      const isHidden = dropdown.classList.contains('hidden');
+      console.log('TOC clicked, isHidden:', isHidden);
+
       if (isHidden) {
-        tocDropdown.classList.remove('hidden');
-        tocToggle.classList.add('active');
+        dropdown.classList.remove('hidden');
+        newToggle.classList.add('active');
       } else {
-        tocDropdown.classList.add('hidden');
-        tocToggle.classList.remove('active');
+        dropdown.classList.add('hidden');
+        newToggle.classList.remove('active');
       }
     });
 
     // Close when clicking outside
     document.addEventListener('click', (e) => {
-      if (!tocContainer.contains(e.target)) {
-        tocDropdown.classList.add('hidden');
-        tocToggle.classList.remove('active');
+      const container = document.getElementById('homepage-toc-container');
+      const dropdown = document.getElementById('homepage-toc-dropdown');
+      const toggle = document.getElementById('homepage-toc-toggle');
+
+      if (container && !container.contains(e.target)) {
+        dropdown?.classList.add('hidden');
+        toggle?.classList.remove('active');
       }
     });
 
@@ -197,21 +210,27 @@ const sections = [
           }
         }
 
-        tocDropdown.classList.add('hidden');
-        tocToggle.classList.remove('active');
+        const dropdown = document.getElementById('homepage-toc-dropdown');
+        const toggle = document.getElementById('homepage-toc-toggle');
+        dropdown?.classList.add('hidden');
+        toggle?.classList.remove('active');
       });
     });
 
     // Update active section on scroll
     function updateActiveSection() {
       const scrollPos = window.scrollY + window.innerHeight / 3;
+      const currentSectionEl = document.getElementById('homepage-current-section');
+      const items = document.querySelectorAll('#homepage-toc-dropdown .toc-item');
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
         if (section && section.offsetTop <= scrollPos) {
-          currentSection.textContent = sections[i].name;
+          if (currentSectionEl) {
+            currentSectionEl.textContent = sections[i].name;
+          }
 
-          tocItems.forEach(item => {
+          items.forEach(item => {
             if (item.getAttribute('data-section') === sections[i].name) {
               item.classList.add('active');
             } else {
@@ -239,7 +258,11 @@ const sections = [
     updateActiveSection();
   }
 
-  // Initialize on page load and Astro transitions
-  document.addEventListener('DOMContentLoaded', initHomepageTOC);
+  // Initialize immediately and on events
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomepageTOC);
+  } else {
+    initHomepageTOC();
+  }
   document.addEventListener('astro:page-load', initHomepageTOC);
 </script>
