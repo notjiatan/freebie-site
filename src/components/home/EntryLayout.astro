@@ -16,8 +16,54 @@ import Button from "@components/common/Button.astro";
 import Footer from "@components/base/Footer.astro";
 import PricingTable from "@components/common/PricingTable.astro";
 import HomepageTOC from "@components/common/HomepageTOC.astro";
+import { Image } from "astro:assets";
 import type { HomeEntry } from "@/types";
 import { getIndex } from "@lib/contentParser";
+
+// Import carousel images
+import greggsImg from "../../../public/assets/carousel/greggs.webp";
+import appleImg from "../../../public/assets/carousel/apple.webp";
+import amazonImg from "../../../public/assets/carousel/amazon.webp";
+import uberEatsImg from "../../../public/assets/carousel/uber-eats.webp";
+import nandosImg from "../../../public/assets/carousel/nandos.webp";
+import mcdonaldsImg from "../../../public/assets/carousel/mcdonalds.webp";
+
+// Import how-it-works images
+import servicesImg from "../../../public/assets/how-it-works/services.png";
+
+// Import SVG icons for offerings
+import subscriptionSvg from "../../../public/svg/subscription.svg";
+import discountSvg from "../../../public/svg/discount.svg";
+import foodSvg from "../../../public/svg/food.svg";
+import moneySvg from "../../../public/svg/money.svg";
+import chatSvg from "../../../public/svg/chat.svg";
+import phoneSvg from "../../../public/svg/phone.svg";
+import moreSvg from "../../../public/svg/more.svg";
+
+// Import brand logo SVGs
+import netflixSvg from "../../../public/svg/netflix.svg";
+import spotifySvg from "../../../public/svg/spotify.svg";
+import applemusicSvg from "../../../public/svg/applemusic.svg";
+import mcdonaldsSvg from "../../../public/svg/mcdonalds.svg";
+import kfcSvg from "../../../public/svg/kfc.svg";
+import burgerkingSvg from "../../../public/svg/burgerking.svg";
+
+// Map SVG paths to imports
+const svgMap: Record<string, any> = {
+  '/svg/subscription.svg': subscriptionSvg,
+  '/svg/discount.svg': discountSvg,
+  '/svg/food.svg': foodSvg,
+  '/svg/money.svg': moneySvg,
+  '/svg/chat.svg': chatSvg,
+  '/svg/phone.svg': phoneSvg,
+  '/svg/more.svg': moreSvg,
+  '/svg/netflix.svg': netflixSvg,
+  '/svg/spotify.svg': spotifySvg,
+  '/svg/applemusic.svg': applemusicSvg,
+  '/svg/mcdonalds.svg': mcdonaldsSvg,
+  '/svg/kfc.svg': kfcSvg,
+  '/svg/burgerking.svg': burgerkingSvg,
+};
 
 interface Props {
   entry: HomeEntry;
@@ -106,7 +152,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
           <div class="carousel" mask>
             <!-- Service: Greggs -->
             <article>
-              <img src="/assets/carousel/greggs.webp" alt="Greggs bakery and food">
+              <Image src={greggsImg} alt="Greggs bakery and food" />
               <h2>Greggs</h2>
               <div>
                 <ul>
@@ -117,7 +163,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
             <!-- Service: Apple Music -->
             <article>
-              <img src="/assets/carousel/apple.webp" alt="Apple Music streaming">
+              <Image src={appleImg} alt="Apple Music streaming" />
               <h2>Apple Music</h2>
               <div>
                 <ul>
@@ -128,7 +174,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
             <!-- Service: Amazon Prime -->
             <article>
-              <img src="/assets/carousel/amazon.webp" alt="Amazon Prime delivery and streaming">
+              <Image src={amazonImg} alt="Amazon Prime delivery and streaming" />
               <h2>Amazon Prime</h2>
               <div>
                 <ul>
@@ -139,7 +185,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
             <!-- Service: Uber Eats -->
             <article>
-              <img src="/assets/carousel/uber-eats.webp" alt="Uber Eats food delivery">
+              <Image src={uberEatsImg} alt="Uber Eats food delivery" />
               <h2>Uber Eats</h2>
               <div>
                 <ul>
@@ -150,7 +196,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
             <!-- Service: Nandos -->
             <article>
-              <img src="/assets/carousel/nandos.webp" alt="Nandos restaurant food">
+              <Image src={nandosImg} alt="Nandos restaurant food" />
               <h2>Nandos</h2>
               <div>
                 <ul>
@@ -161,7 +207,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
 
             <!-- Service: McDonalds -->
             <article>
-              <img src="/assets/carousel/mcdonalds.webp" alt="McDonald's fast food">
+              <Image src={mcdonaldsImg} alt="McDonald's fast food" />
               <h2>McDonald's</h2>
               <div>
                 <ul>
@@ -213,7 +259,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
               <div class="step-item">
                 <div class="step-content">
                   <div class="step-image">
-                    <img src="/assets/how-it-works/services.png" alt="Browse freebies" loading="lazy" />
+                    <Image src={servicesImg} alt="Browse freebies" loading="lazy" />
                   </div>
                   <div class="step-text">
                     <h3 class="step-title">Step 2 — Browse Available Freebies</h3>
@@ -270,9 +316,13 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                           <div class="more-badge-icon">
                             <span>10's more</span>
                           </div>
+                        ) : svgMap[iconUrl] ? (
+                          <div class="brand-icon">
+                            <Image src={svgMap[iconUrl]} alt="Brand icon" loading="lazy" />
+                          </div>
                         ) : (
                           <div class="brand-icon">
-                            <img src={iconUrl} alt="Brand icon" />
+                            <img src={iconUrl} alt="Brand icon" loading="lazy" />
                           </div>
                         );
                       })}
@@ -283,7 +333,7 @@ const { title: offerTitle, description: offerDesc, offerings } = whatWeOfferEntr
                 <!-- Category Icon -->
                 {offering.icon && (
                   <div class="offering-card-icon">
-                    <img src={offering.icon} alt={offering.title} />
+                    <img src={offering.icon} alt={offering.title} loading="lazy" />
                   </div>
                 )}
               </div>
