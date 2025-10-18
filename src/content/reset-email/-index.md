@@ -1,11 +1,11 @@
 ---
-title: Reset Email Address
-description: Instructions for resetting your email address
+title: Change Email Address
+description: Instructions for changing your email address
 ---
 
-# Reset Email Address
+# Change Your Email Address
 
-To reset your email address, please contact our support team at:
+To change your email address, please contact our support team at:
 
 **<fondness-shirt-oak@duck.com>**
 
@@ -13,9 +13,8 @@ Include the following information in your request:
 
 - Your **Current** Email Address that we have on file
 - The email address that you would like to change to
-- Any other information about why you no longer have access to said email address
+- Any other relevant information
 
 ---
 
 &copy; 2025 Freebie Finders. All rights reserved.
-
